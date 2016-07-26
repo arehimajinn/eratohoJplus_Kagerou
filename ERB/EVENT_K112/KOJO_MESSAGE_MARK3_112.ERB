@@ -1,0 +1,2855 @@
+;--------------------------------------------------
+;@KOJO_MESSAGE_MARK3_112関係（112をキャラ番号に置換）
+;調教者 = MASTER or PLAYER（どちらかは要確認。とはいえ助手を考慮しないのなら別の話で）
+;助手	= ASSI
+;対象	= TARGET
+;--------------------------------------------------
+;解説：
+;	INSERT_CONTINUEABLE()
+;		抜かずにうふふ。AでもVでも性交系コマンドで抜かないで実行したら1
+;		IF文の中にこれが入っていたら抜かないで実行した時にしか表示されないことに注意
+;	TFLAG:17
+;		色々な場所で使いまくりのフラグ。結構な頻度で出てくるのでちゃんと確認を推奨
+;	TFLAG:18
+;		うふふ以外でほぼ使われるフラグ。大成功or成功or失敗が多いが稀に例外も
+;--------------------------------------------------
+;地獄３
+;これコピペで皆も使えると思うしドンドン使って（適当
+;--------------------------------------------------
+@KOJO_MESSAGE_MARK3_112
+
+;～～～～～～～～～～～～～～～～～～～～～～～～～
+;コミュニケーション系コマンド
+;～～～～～～～～～～～～～～～～～～～～～～～～～
+SELECTCASE SELECTCOM
+	;弾幕ごっこ
+	CASE 300
+		SELECTCASE TFLAG:18
+			;大成功
+			CASE 1
+				
+			;成功
+			CASE 0
+				
+			;失敗
+			CASE -1
+				
+		ENDSELECT
+	;会話
+	CASE 301
+		SELECTCASE TFLAG:18
+			;大成功
+			CASE 1
+				
+			;成功
+			CASE 0
+				
+			;失敗
+			CASE -1
+				
+		ENDSELECT
+	;プレゼント
+	CASE 302
+		SELECTCASE TFLAG:18
+			;大成功
+			CASE 1
+				SELECTCASE TFLAG:17
+					;スマイル
+					CASE 0
+						
+					;お酒
+					CASE 1
+						
+					;日用品
+					CASE 2
+						
+					;アクセサリ
+					CASE 3
+						
+					;服
+					CASE 4
+						
+					;外界のお酒
+					CASE 5
+						
+					;酒樽
+					CASE 7
+						
+				ENDSELECT
+			;成功
+			CASE 0
+				SELECTCASE TFLAG:17
+					;スマイル
+					CASE 0
+						
+					;お酒
+					CASE 1
+						
+					;日用品
+					CASE 2
+						
+					;アクセサリ
+					CASE 3
+						
+					;服
+					CASE 4
+						
+					;外界のお酒
+					CASE 5
+						
+					;酒樽
+					CASE 7
+						
+				ENDSELECT
+			;失敗
+			CASE -1
+				SELECTCASE TFLAG:17
+					;スマイル
+					CASE 0
+						
+					;お酒
+					CASE 1
+						
+					;日用品
+					CASE 2
+						
+					;アクセサリ
+					CASE 3
+						
+					;服
+					CASE 4
+						
+					;外界のお酒
+					CASE 5
+						
+					;酒樽
+					CASE 7
+						
+				ENDSELECT
+		ENDSELECT
+	;スキンシップ
+	CASE 303
+		SELECTCASE TFLAG:18
+			;大成功
+			CASE 1
+				
+			;成功
+			CASE 0
+				
+			;失敗
+			CASE -1
+				
+		ENDSELECT
+	;まったりする
+	CASE 304
+		SELECTCASE TFLAG:18
+			;大成功
+			CASE 1
+				
+			;成功
+			CASE 0
+				
+			;失敗
+			CASE -1
+				
+		ENDSELECT
+	;家事
+	CASE 305
+		SELECTCASE TFLAG:18
+			;大成功
+			CASE 1
+				
+			;成功
+			CASE 0
+				
+			;失敗
+			CASE -1
+				;午前。疲れる
+				IF !TIME
+					
+				;午後。眠い
+				ELSE
+					
+				ENDIF
+		ENDSELECT
+	;髪梳き
+	CASE 306
+		;調教者に主導権
+		IF !TFLAG:45
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		;対象に主導権
+		ELSE
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		ENDIF
+	;櫛で梳かす
+	CASE 307
+		;調教者に主導権
+		IF !TFLAG:45
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		;対象に主導権
+		ELSE
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		ENDIF
+	;羽繕い
+	CASE 308
+		;調教者に主導権
+		IF !TFLAG:45
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		;対象に主導権
+		ELSE
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		ENDIF
+	;素材探し
+	CASE 309
+		SELECTCASE TFLAG:18
+			;大成功
+			CASE 1
+				
+			;成功
+			CASE 0
+				
+			;失敗
+			CASE -1
+				
+		ENDSELECT
+	;調合
+	CASE 310
+		;成功
+		IF TFLAG:18 > -1
+			SELECTCASE TFLAG:17
+				;全てを含む。個別に対応したい場合上にCASE {レシビ番号}を挟む
+				CASE 0 TO 666
+					
+			ENDSELECT
+		;失敗
+		ELSE
+			SELECTCASE TFLAG:17
+				;全てを含む。個別に対応したい場合上にCASE {レシビ番号}を挟む
+				CASE 0 TO 666
+					
+			ENDSELECT
+		ENDIF
+	;甘い言葉
+	CASE 311
+		SELECTCASE TFLAG:18
+			;最高
+			CASE 4
+				
+			;大成功
+			CASE 3
+				
+			;成功
+			CASE 2
+				
+			;ちょっと成功
+			CASE 1
+				
+			;ムードは上がるが好意等が下がるライン
+			CASE 0
+				
+			;ムードもだだ下がり
+			CASE -1
+				
+			;最悪
+			CASE -2
+				
+		ENDSELECT
+	;頭を撫でる
+	CASE 312
+		;調教者に主導権
+		IF !TFLAG:45
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		;対象に主導権
+		ELSE
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		ENDIF
+	;願掛け
+	CASE 313
+		SELECTCASE TFLAG:18
+			;大成功
+			CASE 1
+				SELECTCASE TFLAG:17
+					;元日に博麗神社か守矢神社
+					CASE 0
+						
+					;デート先に博麗神社か守矢神社
+					CASE 1
+						
+					;七夕
+					CASE 2
+						
+					;流星雨
+					CASE 3
+						
+					;流星
+					CASE 4
+						
+				ENDSELECT
+			;成功
+			CASE 0
+				SELECTCASE TFLAG:17
+					;元日に博麗神社か守矢神社
+					CASE 0
+						
+					;デート先に博麗神社か守矢神社
+					CASE 1
+						
+					;七夕
+					CASE 2
+						
+					;流星雨
+					CASE 3
+						
+					;流星
+					CASE 4
+						
+				ENDSELECT
+			;失敗
+			CASE -1
+				SELECTCASE TFLAG:17
+					;元日に博麗神社か守矢神社
+					CASE 0
+						
+					;デート先に博麗神社か守矢神社
+					CASE 1
+						
+					;七夕
+					CASE 2
+						
+					;流星雨
+					CASE 3
+						
+					;流星
+					CASE 4
+						
+				ENDSELECT
+		ENDSELECT
+	;炬燵
+	CASE 314
+		;入る
+		IF TEQUIP:7
+			
+		;出る
+		ELSE
+			
+		ENDIF
+	;散歩する
+	CASE 315
+		;傘が必要になる程度の天候、もしくは吸血鬼が居る
+		IF (TIME:5 >= 3 || TALENT:114 || TALENT:PLAYER:114) && TIME:5 != 2
+			SELECTCASE TFLAG:17
+				;超強化版
+				CASE 2
+					
+				;強化版
+				CASE 1
+					
+				;通常
+				CASE 0
+					
+			ENDSELECT
+		;それ以外
+		ELSE
+			SELECTCASE TFLAG:17
+				;超強化版
+				CASE 2
+					
+				;強化版
+				CASE 1
+					
+				;通常
+				CASE 0
+					
+			ENDSELECT
+		ENDIF
+	;宴会に参加
+	CASE 320
+		;デート中は二人で飲む
+		IF TEQUIP:2
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		ELSE
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		ENDIF
+	;遊びに行く、わりとクソみたいな分岐で微妙
+	CASE 321
+		;調教者に主導権
+		IF !TFLAG:45
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					SELECTCASE TFLAG:17
+						;幽霊屋敷
+						CASE 2
+							
+						;弾幕ごっこ
+						CASE 1
+							
+						;通常
+						CASE 0
+							
+					ENDSELECT
+				;成功
+				CASE 0
+					SELECTCASE TFLAG:17
+						;幽霊屋敷
+						CASE 2
+							
+						;弾幕ごっこ
+						CASE 1
+							
+						;通常
+						CASE 0
+							
+					ENDSELECT
+				;失敗
+				CASE -1
+					SELECTCASE TFLAG:17
+						;幽霊屋敷
+						CASE 2
+							
+						;弾幕ごっこ
+						CASE 1
+							
+						;通常
+						CASE 0
+							
+					ENDSELECT
+			ENDSELECT
+		;対象に主導権
+		ELSE
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					SELECTCASE TFLAG:17
+						;幽霊屋敷
+						CASE 2
+							
+						;弾幕ごっこ
+						CASE 1
+							
+						;通常
+						CASE 0
+							
+					ENDSELECT
+				;成功
+				CASE 0
+					SELECTCASE TFLAG:17
+						;幽霊屋敷
+						CASE 2
+							
+						;弾幕ごっこ
+						CASE 1
+							
+						;通常
+						CASE 0
+							
+					ENDSELECT
+				;失敗
+				CASE -1
+					SELECTCASE TFLAG:17
+						;幽霊屋敷
+						CASE 2
+							
+						;弾幕ごっこ
+						CASE 1
+							
+						;通常
+						CASE 0
+							
+				ENDSELECT
+			ENDSELECT
+		ENDIF
+	;ストリートライブ
+	CASE 322
+		SELECTCASE TFLAG:18
+			;大成功
+			CASE 1
+				
+			;成功
+			CASE 0
+				
+			;失敗
+			CASE -1
+				
+		ENDSELECT
+	;デート、TEQUIP:2で分岐すれば行く先も取れる
+	CASE 323
+		;デートする
+		IF TEQUIP:2
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		;帰る
+		ELSE
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		ENDIF
+	;縁側でくつろぐ、大抵の場合は霊夢助手で実行になる
+	CASE 325
+		SELECTCASE TFLAG:18
+			;大成功
+			CASE 1
+				
+			;成功
+			CASE 0
+				
+			;失敗
+			CASE -1
+				
+		ENDSELECT
+	;バードキス
+	CASE 340
+		SELECTCASE TFLAG:18
+			;大成功
+			CASE 1
+				
+			;成功
+			CASE 0
+				
+			;失敗
+			CASE -1
+				
+		ENDSELECT
+	;ソフトキス
+	CASE 341
+		;キス経験50以上で地の文変わる
+		IF EXP:96 >= 50
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		;50未満
+		ELSE
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		ENDIF
+	;ディープキス
+	CASE 342
+		;調教者に主導権
+		IF !TFLAG:45
+			;キス経験50以上で地の文が変わる
+			IF EXP:96 >= 50
+				SELECTCASE TFLAG:18
+					;大成功
+					CASE 1
+						
+					;成功
+					CASE 0
+						
+					;失敗
+					CASE -1
+						
+				ENDSELECT
+			;50未満
+			ELSE
+				SELECTCASE TFLAG:18
+					;大成功
+					CASE 1
+						
+					;成功
+					CASE 0
+						
+					;失敗
+					CASE -1
+						
+				ENDSELECT
+			ENDIF
+		;対象に主導権
+		ELSE
+			;キス経験50以上で地の文が変わる
+			IF EXP:96 >= 50
+				SELECTCASE TFLAG:18
+					;大成功
+					CASE 1
+						
+					;成功
+					CASE 0
+						
+					;失敗
+					CASE -1
+						
+				ENDSELECT
+			;50未満
+			ELSE
+				SELECTCASE TFLAG:18
+					;大成功
+					CASE 1
+						
+					;成功
+					CASE 0
+						
+					;失敗
+					CASE -1
+						
+				ENDSELECT
+			ENDIF
+		ENDIF
+	;胸愛撫
+	CASE 360
+		;調教者に主導権
+		IF !TFLAG:45
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		;対象に主導権
+		ELSE
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		ENDIF
+	;愛撫
+	CASE 361
+		;調教者に主導権
+		IF !TFLAG:45
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		;対象に主導権
+		ELSE
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		ENDIF
+	;着衣指挿入れ
+	CASE 362
+		;調教者に主導権
+		IF !TFLAG:45
+			;前回のコマンドが指挿入れか性交系コマンド
+			IF GROUPMATCH(PREVCOM, 362, 363, 364, 365, 366)
+				
+			;それ以外
+			ELSE
+				
+			ENDIF
+		;対象に主導権
+		ELSE
+			;前回のコマンドが指挿入れか性交系コマンド
+			IF GROUPMATCH(PREVCOM, 362, 363, 364, 365, 366)
+				
+			;それ以外
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;セックス
+	CASE 363
+		;調教者に主導権
+		IF !TFLAG:45
+			;前回のコマンドがセックス
+			IF INSERT_CONTINUEABLE() && PREVCOM == 363
+				
+			;前回のコマンドが着衣後背位か着衣騎乗位
+			ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 365, 366)
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		;対象に主導権
+		ELSE
+			;前回のコマンドがセックス
+			IF INSERT_CONTINUEABLE() && PREVCOM == 363
+				
+			;前回のコマンドが着衣後背位か着衣騎乗位
+			ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 365, 366)
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;着衣Ｇスポット刺激
+	CASE 364
+		;前回のコマンドが着衣Ｇスポット刺激である
+		IF PREVCOM == 364
+			
+		;それ以外
+		ELSE
+			
+		ENDIF
+	;着衣後背位
+	CASE 365
+		;前回のコマンドが着衣後背位
+		IF INSERT_CONTINUEABLE() && PREVCOM == 365
+			
+		;前回のコマンドが着衣正常位
+		ELSEIF INSERT_CONTINUEABLE() && PREVCOM == 363
+			
+		;前回のコマンドが着衣騎乗位
+		ELSEIF INSERT_CONTINUEABLE() && PREVCOM == 366
+			
+		;通常
+		ELSE
+			;前回のコマンドが指挿入れか性交系コマンド
+			IF GROUPMATCH(PREVCOM, 362, 363, 364, 365, 366)
+				
+			;それ以外
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;着衣騎乗位
+	CASE 366
+		;前回のコマンドが着衣騎乗位
+		IF INSERT_CONTINUEABLE() && PREVCOM == 366
+			
+		;前回のコマンドがセックスか着衣後背位
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 363, 365)
+			
+		;通常
+		ELSE
+			;前回のコマンドが指挿入れか性交系コマンド
+			IF GROUPMATCH(PREVCOM, 362, 363, 364, 365, 366)
+				
+			;それ以外
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;着衣ローター、口上でTEQUIP:36を1にすると入れっぱなしに出来る
+	CASE 367
+		SELECTCASE TFLAG:17
+			;入れたまま遊びに行く
+			CASE 0
+				
+			;入れたまま弾幕ごっこ
+			CASE 1
+				
+			;入れたまま家事
+			CASE 2
+				
+		ENDSELECT
+	;炬燵かがり、48手の一つ。この場合は対象が炬燵に入り、調教者が対象を膝に乗せる形で座ったままうふふ
+	CASE 368
+		IF INSERT_CONTINUEABLE() && PREVCOM == 368
+			
+		ELSE
+			;調教者に主導権
+			IF !TFLAG:45
+				;前回のコマンドが指挿入れか性交系コマンド
+				IF GROUPMATCH(PREVCOM, 362, 363, 364, 365, 366)
+					
+				;それ以外
+				ELSE
+					
+				ENDIF
+			;対象に主導権
+			ELSE
+				;前回のコマンドが指挿入れか性交系コマンド
+				IF GROUPMATCH(PREVCOM, 362, 363, 364, 365, 366)
+					
+				;それ以外
+				ELSE
+					
+				ENDIF
+			ENDIF
+		ENDIF
+	;抱き合う、わりとごちゃごちゃしているので簡単なものだけ。細かいものを見る場合はCOMF370.ERBを確認
+	CASE 370
+		;調教者に主導権
+		IF !TFLAG:45
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		;対象に主導権
+		ELSE
+			SELECTCASE TFLAG:18
+				;大成功
+				CASE 1
+					
+				;成功
+				CASE 0
+					
+				;失敗
+				CASE -1
+					
+			ENDSELECT
+		ENDIF
+	;オムツ
+	CASE 371
+		;着ける
+		IF TEQUIP:20
+			
+		;外す
+		ELSE
+			
+		ENDIF
+	;尻愛撫
+	CASE 372
+		SELECTCASE TFLAG:18
+			;大成功
+			CASE 1
+				
+			;成功
+			CASE 0
+				
+			;失敗
+			CASE -1
+				
+		ENDSELECT
+	;着衣フェラチオ
+	CASE 373
+		;調教者に主導権
+		IF !TFLAG:45
+			;対象がさとりかつ恋慕なら読心フェラ
+			IF NO:TARGET == 81 && TALENT:恋慕
+				
+			;対象が猫舌なら猫舌フェラ
+			ELSEIF TALENT:猫舌
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		;対象に主導権
+		ELSE
+			;対象がさとりかつ恋慕なら読心フェラ
+			IF NO:TARGET == 81 && TALENT:恋慕
+				
+			;対象が猫舌なら猫舌フェラ
+			ELSEIF TALENT:猫舌
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;着衣フェラする（調教者→対象）
+	CASE 380
+		;調教者に主導権
+		IF !TFLAG:45
+			
+		;対象に主導権
+		ELSE
+			
+		ENDIF
+	;セックスさせる（着衣）
+	CASE 381
+		;前回のコマンドがセックスさせる
+		IF INSERT_CONTINUEABLE() && PREVCOM == 381
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;賭博、ややこしい処理なのでCOMF390.ERBを確認することを推奨
+	CASE 390
+	;衣装替え
+	CASE 391
+		SELECTCASE TEQUIP:65
+			;脱ぐ
+			CASE 0
+				
+			;学ラン
+			CASE 1
+				
+			;セーラー服
+			CASE 2
+				
+			;ブルマ
+			CASE 3
+				
+			;水着
+			CASE 4
+				
+			;スクール水着（紺）
+			CASE 5
+				
+			;スクール水着（白）
+			CASE 6
+				
+			;白衣
+			CASE 7
+				
+			;ナース服
+			CASE 8
+				
+			;女性警察官制服
+			CASE 9
+				
+			;ボンテージスーツ
+			CASE 10
+				
+			;浴衣
+			CASE 11
+				
+			;巫女服
+			CASE 12
+				
+			;博麗霊夢のコスプレ
+			CASE 13
+				
+			;東風谷早苗のコスプレ
+			CASE 14
+				
+			;メイド服
+			CASE 15
+				
+			;十六夜咲夜のコスプレ
+			CASE 16
+				
+			;リボン
+			CASE 17
+				
+			;小悪魔風衣装
+			CASE 18
+				
+			;魔法少女コスチューム
+			CASE 19
+				
+			;ゴシックロリータ
+			CASE 20
+				
+			;バニーガール
+			CASE 21
+				
+			;Yシャツ
+			CASE 22
+				
+			;普段の服
+			CASE 23
+				
+			;あなたの服
+			CASE 24
+				
+		ENDSELECT
+	;衣装破り、破いた衣装は取れない
+	CASE 392
+		;触手が破く
+		IF TEQUIP:90
+			
+		;調教者が破く
+		ELSE
+			
+		ENDIF
+	;見つめ合う、CALL SOURCE_COM393で敏感持ちの対象の場合、SOURCEを増やせる
+	;口上側から呼び出されるのを想定しているので活用しよう
+	CASE 393
+	;口上独自純愛コマンド、分かるくらいならここに書かないと思う
+	CASE 410 TO 414
+ENDSELECT
+
+;～～～～～～～～～～～～～～～～～～～～～～～～～
+;ウフフ系コマンド
+;～～～～～～～～～～～～～～～～～～～～～～～～～
+SELECTCASE SELECTCOM
+	;愛撫
+	CASE 0
+		;着衣
+		IF TEQUIP:65
+			;触手愛撫
+			IF TEQUIP:90
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		;普通
+		ELSE
+			;触手愛撫
+			IF TEQUIP:90
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;クンニ系
+	CASE 1, 87
+		;岩清水
+		IF TEQUIP:57 == 1 || SELECTCOM == 87
+			
+		;クンニ
+		ELSE
+			
+		ENDIF
+	;アナル愛撫
+	CASE 2
+		;触手
+		IF TEQUIP:90
+			
+		;着衣
+		ELSEIF TEQUIP:65
+			;アナルバイブ
+			IF TEQUIP:13
+				
+			;アナルビーズ
+			ELSEIF TEQUIP:19
+				
+			;浣腸器＋プラグ
+			ELSEIF TEQUIP:46
+				
+			;空気浣腸
+			ELSEIF TEQUIP:47
+				
+			;拡張バルーン
+			ELSEIF TEQUIP:48
+				
+			;アナル電極
+			ELSEIF TEQUIP:49
+				
+			;服着てるだけ
+			ELSE
+				
+			ENDIF
+		ELSE
+			;アナルバイブ
+			IF TEQUIP:13
+				
+			;アナルビーズ
+			ELSEIF TEQUIP:19
+				
+			;浣腸器＋プラグ
+			ELSEIF TEQUIP:46
+				
+			;空気浣腸
+			ELSEIF TEQUIP:47
+				
+			;拡張バルーン
+			ELSEIF TEQUIP:48
+				
+			;アナル電極
+			ELSEIF TEQUIP:49
+				
+			;服着てるだけ
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;自慰系
+	CASE 3
+		;撮影中
+		IF TEQUIP:53
+			;シャワー中
+			IF TEQUIP:18
+				;公開シャワー二穴バイブオナニー
+				IF TEQUIP:11 && TEQUIP:13
+					
+				;公開シャワーバイブオナニー
+				ELSEIF TEQUIP:11
+					
+				;公開シャワーアナルバイブクスコオナニー
+				ELSEIF TEQUIP:13 && TEQUIP:61
+					
+				;公開シャワーアナルバイブオナニー
+				ELSEIF TEQUIP:13
+					
+				;公開シャワークスコオナニー
+				ELSEIF TEQUIP:61
+					
+				;公開シャワーオナニー
+				ELSE
+					
+				ENDIF
+			;シャワー中でない
+			ELSE
+				;公開二穴バイブオナニー
+				IF TEQUIP:11 && TEQUIP:13
+					
+				;公開バイブオナニー
+				ELSEIF TEQUIP:11
+					
+				;公開アナルバイブクスコオナニー
+				ELSEIF TEQUIP:13 && TEQUIP:61
+					
+				;公開アナルバイブオナニー
+				ELSEIF TEQUIP:13
+					
+				;公開シャワークスコオナニー
+				ELSEIF TEQUIP:61
+					
+				;公開オナニー
+				ELSE
+					
+				ENDIF
+			ENDIF
+		;シャワー中
+		ELSEIF TEQUIP:18
+			;シャワー二穴バイブオナニー
+			IF TEQUIP:11 && TEQUIP:13
+				
+			;シャワーバイブオナニー
+			ELSEIF TEQUIP:11
+			
+			;シャワーアナルバイブクスコオナニー
+			ELSEIF TEQUIP:13 && TEQUIP:61
+				
+			;シャワーアナルバイブオナニー
+			ELSEIF TEQUIP:13
+				
+			;公開シャワークスコオナニー
+			ELSEIF TEQUIP:61
+				
+			;シャワーオナニー
+			ELSE
+				
+			ENDIF
+		ELSE
+			;二穴バイブオナニー
+			IF TEQUIP:11 && TEQUIP:13
+				
+			;バイブオナニー
+			ELSEIF TEQUIP:11
+				
+			;シャワーアナルバイブクスコオナニー
+			ELSEIF TEQUIP:13 && TEQUIP:61
+				
+			;アナルバイブオナニー
+			ELSEIF TEQUIP:13
+				
+			;公開シャワークスコオナニー
+			ELSEIF TEQUIP:61
+				
+			;自慰
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;フェラする
+	CASE 4
+	;胸愛撫
+	CASE 5
+		;着衣
+		IF TEQUIP:65
+			;着衣触手
+			IF TEQUIP:90
+				
+			;着衣のみ
+			ELSE
+				
+			ENDIF
+		;普通
+		ELSE
+			;触手
+			IF TEQUIP:90
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;キスする
+	CASE 6
+	;何もしない
+	CASE 7
+	;指挿入れ
+	CASE 8
+		;バイブ挿し入れ
+		IF TEQUIP:11
+			
+		;クスコ拡張愛撫
+		ELSEIF TEQUIP:61
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;アナル舐め
+	CASE 9
+	;ローター
+	CASE 10
+		;高性能ローター
+		IF TALENT:PLAYER:淫具知識
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;バイブ、触手バイブ
+	CASE 11, 101
+		;入れる
+		IF TEQUIP:11
+			;触手挿入
+			IF TEQUIP:90
+				
+			;高性能バイブ
+			ELSEIF TALENT:PLAYER:淫具知識
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		;抜く
+		ELSE
+			;触手を抜く
+			IF TEQUIP:90
+				
+			;バイブを抜く
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;Ｅマッサージャ
+	CASE 12
+		;高性能Ｅマッサージャ
+		IF TALENT:PLAYER:淫具知識
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;アナルバイブ、アナル触手
+	CASE 13, 102
+		;入れる
+		IF TEQUIP:13
+			;アナル触手
+			IF TEQUIP:90
+				
+			;高性能アナルバイブ
+			ELSEIF TALENT:PLAYER:淫具知識
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		;抜く
+		ELSE
+			;触手を抜く
+			IF TEQUIP:90
+				
+			;アナルバイブを抜く
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;クリキャップ、触手クリ責め
+	CASE 14, 103
+		;付ける
+		IF TEQUIP:14
+			;触手クリ責め
+			IF TEQUIP:90
+				
+			;高性能電動クリキャップ
+			ELSEIF TALENT:PLAYER:淫具知識
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		;外す
+		ELSE
+			;触手を抜く
+			IF TEQUIP:90
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;ニプルキャップ、触手乳首責め
+	CASE 15, 104
+		;付ける
+		IF TEQUIP:15
+			;触手乳首責め
+			IF TEQUIP:90
+				
+			;高性能ニプルキャップ
+			ELSEIF TALENT:PLAYER:淫具知識
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		;外す
+		ELSE
+			;触手を止める
+			IF TEQUIP:90
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;搾乳器、触手搾乳
+	CASE 16, 105
+		;付ける
+		IF TEQUIP:16
+			;触手搾乳
+			IF TEQUIP:90
+				
+			;高性能搾乳器
+			ELSEIF TALENT:PLAYER:淫具知識
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		;外す
+		ELSE
+			;触手を止める
+			IF TEQUIP:90
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;オナホール、触手ペニス責め
+	CASE 17, 109
+		;付ける
+		IF TEQUIP:17 
+			;触手ペニス責め
+			IF TEQUIP:90
+				
+			;高性能オナホール
+			ELSEIF TALENT:PLAYER:淫具知識
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		;外す
+		ELSE
+			;触手を止める
+			IF TEQUIP:90
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;シャワー
+	CASE 18
+		;浴びる
+		IF TEQUIP:18
+			;着衣シャワー
+			IF TEQUIP:65
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		;やめる
+		ELSE
+			;着衣
+			IF TEQUIP:65
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;アナルビーズ
+	CASE 19
+		;付ける
+		IF TEQUIP:19
+			
+		;外す
+		ELSE
+			
+		ENDIF
+	;正常位
+	CASE 20
+		;抜かず連続で正常位
+		IF INSERT_CONTINUEABLE() && PREVCOM == 20
+			
+		;前回が後背位か対面座位、または背面座位もしくは騎乗位のどれか
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 21, 24, 25, 34)
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;後背位
+	CASE 21
+		;抜かず連続で後背位
+		IF INSERT_CONTINUEABLE() && PREVCOM == 21
+			
+		;前回が正常位
+		ELSEIF INSERT_CONTINUEABLE() && PREVCOM == 20
+		;前回が対面座位か背面座位、または騎乗位のどれか
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 24, 25, 34)
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;アナルセックス
+	CASE 22
+		;前回がアナルセックスか正常位アナル
+		IF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 22, 26)
+			
+		;前回が後背位アナルか対面座位アナル、または背面座位アナルのどれか
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 27, 28, 29)
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;逆レイプ
+	CASE 23
+		;前回と今回の調教者が同じで、前回の調教が逆レイプであり、抜かないフラグがある場合
+		IF INSERT_CONTINUEABLE() && PREVCOM == 23
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;対面座位
+	CASE 24
+		;抜かず連続で対面座位
+		IF INSERT_CONTINUEABLE() && PREVCOM == 24
+			
+		;前回が正常位か騎乗位
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 20, 34)
+			
+		;前回が後背位か背面座位
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 21, 25)
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;背面座位、乱れ牡丹。地の文が共用なため、口上側で区別する必要性をあまり感じない。
+	CASE 25, 88
+		;羞恥プレイ中
+		IF TEQUIP:57
+			;前回が背面座位（羞恥プレイ中なので乱れ牡丹）
+			IF INSERT_CONTINUEABLE() && PREVCOM == 88
+				
+			;前回が後背位か騎乗位
+			ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 21, 34)
+				
+			;前回が正常位か対面座位
+			ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 20, 24)
+				
+			;羞恥プレイ中で特に何もない
+			ELSE
+				
+			ENDIF
+		;通常
+		ELSE
+			;前回が背面座位
+			IF INSERT_CONTINUEABLE() && PREVCOM == 25
+				
+			;前回が後背位か騎乗位
+			ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 21, 34)
+				
+			;前回が正常位か対面座位
+			ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 20, 24)
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;正常位アナル
+	CASE 26
+		;前回がアナルセックスか正常位アナル
+		IF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 22, 26)
+			
+		;前回が後背位アナルか対面座位アナル、もしくは背面座位アナルか騎乗位アナル
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 27, 28, 29, 36)
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;後背位アナル
+	CASE 27
+		;前回が後背位アナル
+		IF INSERT_CONTINUEABLE() && PREVCOM == 27
+			
+		;前回が正常位アナル
+		ELSEIF INSERT_CONTINUEABLE() && PREVCOM == 26
+			
+		;前回が対面座位アナルか背面座位アナル、もしくは騎乗位アナル
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 28, 29, 36)
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;対面座位アナル
+	CASE 28
+		;前回が対面座位アナル
+		IF INSERT_CONTINUEABLE() && PREVCOM == 28
+			
+		;前回が正常位アナルか騎乗位アナル
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 26, 36)
+			
+		;前回が後背位アナルか背面座位アナル
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 27, 29)
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;背面座位アナル
+	CASE 29
+		;前回が背面座位アナル
+		IF INSERT_CONTINUEABLE() && PREVCOM == 29
+			
+		;前回が後背位アナルか騎乗位アナル
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 27, 36)
+			
+		;前回が正常位アナルか対面座位アナル
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 26, 28)
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;手淫
+	CASE 30
+		;対象がさとりかつ恋慕なら読心手淫
+		IF NO:TARGET == 81 && TALENT:恋慕
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;フェラチオ
+	CASE 31
+		;対象がさとりかつ恋慕なら読心フェラ
+		IF NO:TARGET == 81 && TALENT:恋慕
+			
+		;潜望鏡
+		ELSEIF TEQUIP:58
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;パイズリ
+	CASE 32
+		;着衣パイズリ
+		IF TEQUIP:65
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;素股
+	CASE 33
+	;騎乗位
+	CASE 34
+		;抜かず連続で騎乗位
+		IF INSERT_CONTINUEABLE() && PREVCOM == 34
+			
+		;前回が正常位か後背位
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 20, 21)
+			
+		;前回が対面座位か背面座位
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 24, 25)
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;泡踊り
+	CASE 35
+	;騎乗位アナル
+	CASE 36
+		;前回が騎乗位アナル
+		IF INSERT_CONTINUEABLE() && PREVCOM == 36
+			
+		;前回が正常位アナルか後背位アナル
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 26, 27)
+			
+		;前回が対面座位アナルか背面座位アナル
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 28, 29)
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;足扱き
+	CASE 37
+	;尻素股
+	CASE 38
+		;調教者に主導権
+		IF !TFLAG:45
+			
+		;対象に主導権
+		ELSE
+			
+		ENDIF
+	;オナホ手淫
+	CASE 39
+		;対象がさとりかつ恋慕なら読心オナホ手淫
+		IF NO:TARGET == 81 && TALENT:恋慕
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;スパンキング
+	CASE 40
+		;調教者に主導権
+		IF !TFLAG:45
+			
+		;対象に主導権
+		ELSE
+			
+		ENDIF
+	;鞭
+	CASE 41
+		;調教者に主導権
+		IF !TFLAG:45
+			
+		;対象に主導権
+		ELSE
+			
+		ENDIF
+	;針
+	CASE 42
+		;調教者に主導権
+		IF !TFLAG:45
+			
+		;対象に主導権
+		ELSE
+			
+		ENDIF
+	;アイマスク
+	CASE 43
+		;付ける
+		IF TEQUIP:43
+			
+		;外す
+		ELSE
+			
+		ENDIF
+	;縄、触手緊縛
+	CASE 44, 106
+		;縛る
+		IF TEQUIP:44
+			;触手緊縛
+			IF TEQUIP:90
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		;解く
+		ELSE
+			
+		ENDIF
+	;ポールギャグ
+	CASE 45
+		;外す。というか付ける時は付けた後表示なので違和感たっぷり。外す時は外した後に表示になる
+		IF !TEQUIP:45
+			
+		ENDIF
+	;浣腸器＋プラグ、触手浣腸
+	CASE 46, 107
+		;装着時
+		IF !TEQUIP:46
+			;触手浣腸
+			IF TEQUIP:90
+				
+			;浣腸
+			ELSE
+				
+			ENDIF
+		;外す時
+		ELSE
+			;着衣排泄
+			IF TEQUIP:65
+				
+			;排泄
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;空気浣腸
+	CASE 47
+		;入れる
+		IF TEQUIP:47
+			
+		;抜く
+		ELSE
+			
+		ENDIF
+	;拡張バルーン
+	CASE 48
+		;入れる
+		IF TEQUIP:48
+			
+		;抜く
+		ELSE
+			
+		ENDIF
+	;アナル電極
+	CASE 49
+		;入れる
+		IF TEQUIP:49
+			
+		;抜く
+		ELSE
+			
+		ENDIF
+	;ローション
+	CASE 50
+		;着衣ローション
+		IF TEQUIP:65
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;媚薬
+	CASE 51
+		;触手で媚薬を出す
+		IF TEQUIP:90
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;利尿剤
+	CASE 52
+		;触手で利尿剤を出す
+		IF TEQUIP:90
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;ビデオカメラ
+	CASE 53
+		;始める
+		IF !TEQUIP:53
+			
+		;終わる
+		ELSE
+			
+		ENDIF
+	;野外プレイ
+	CASE 54
+		;始める
+		IF !TEQUIP:54
+			
+		;終わる
+		ELSE
+			
+		ENDIF
+	;助手を犯す
+	CASE 56
+		;前回も助手を犯すだった
+		IF TFLAG:60 && PREVCOM == 56
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;羞恥プレイ
+	CASE 57
+		;始める
+		IF TEQUIP:57
+			;実行時調教者が四季映姫なら浄玻璃の鏡
+			IF TEQUIP:57 == 2
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		;終わる。浄玻璃の鏡だったかどうかは判定できない
+		ELSE
+			
+		ENDIF
+	;お風呂場プレイ
+	CASE 58
+		;始める
+		IF TEQUIP:58
+			
+		;終わる
+		ELSE
+			
+		ENDIF
+	;新妻プレイ
+	CASE 59
+		;始める
+		IF TEQUIP:59
+			
+		;終わる
+		ELSE
+			
+		ENDIF
+	;助手にキス
+	CASE 60
+	;クンニ強制
+	CASE 61
+	;ダブル素股
+	CASE 62
+	;貝あわせ
+	CASE 63
+	;3P（調教者→対象、助手→対象）
+	CASE 64
+		;対象を犯しながら、助手に対象を犯させる
+		IF ASSIPLAY
+			;調教者がすること
+			SELECTCASE TFLAG:40
+				;∨に挿入
+				CASE 1
+					;助手がすること
+					SELECTCASE TFLAG:41
+						;∨に挿入
+						CASE 1
+							
+						;Ａに挿入
+						CASE 2
+							
+						;口に挿入
+						CASE 3
+							
+					ENDSELECT
+				;Ａに挿入
+				CASE 2
+					;助手がすること
+					SELECTCASE TFLAG:41
+						;∨に挿入
+						CASE 1
+							
+						;Ａに挿入
+						CASE 2
+							
+						;口に挿入
+						CASE 3
+							
+					ENDSELECT
+				;口に挿入
+				CASE 3
+					;助手がすること
+					SELECTCASE TFLAG:41
+						;∨に挿入
+						CASE 1
+							
+						;Ａに挿入
+						CASE 2
+							
+						;口に挿入
+						CASE 3
+							
+					ENDSELECT
+			ENDSELECT
+		;助手に対象を犯させながら、対象を犯す
+		ELSE
+			;助手がすること
+			SELECTCASE TFLAG:41
+				;∨に挿入
+				CASE 1
+					;調教者がすること
+					SELECTCASE TFLAG:40
+						;∨に挿入
+						CASE 1
+							
+						;Ａに挿入
+						CASE 2
+							
+						;口に挿入
+						CASE 3
+							
+					ENDSELECT
+				;Ａに挿入
+				CASE 2
+					;調教者がすること
+					SELECTCASE TFLAG:40
+						;∨に挿入
+						CASE 1
+							
+						;Ａに挿入
+						CASE 2
+							
+						;口に挿入
+						CASE 3
+							
+					ENDSELECT
+				;口に挿入
+				CASE 3
+					;調教者がすること
+					SELECTCASE TFLAG:40
+						;∨に挿入
+						CASE 1
+							
+						;Ａに挿入
+						CASE 2
+							
+						;口に挿入
+						CASE 3
+							
+					ENDSELECT
+			ENDSELECT
+		ENDIF
+	;助手を犯させる
+	CASE 65
+	;Ｗフェラ（TARGETがASSIとPLAYERの二人のものをフェラする）
+	CASE 66
+	;足コキ（PLAYERがTARGETにする）
+	CASE 67
+	;ダブルフェラ（TARGETとASSIがPLAYERにする）
+	CASE 68
+	;シックスナイン
+	CASE 69
+		;調教者と対象
+		IF !ASSIPLAY
+			
+		;助手と対象がする
+		ELSE
+			
+		ENDIF
+	;罵倒
+	CASE 70
+	;秘貝開帳
+	CASE 71
+	;サラシ。霊夢or妖夢or早苗だと地の文が変わる
+	CASE 72
+		;巻く
+		IF TEQUIP:76
+			
+		;外す
+		ELSE
+			
+		ENDIF
+	;スク水プレイ
+	CASE 73
+		;着る
+		IF !TEQUIP:60
+			
+		;脱ぐ
+		ELSE
+			
+		ENDIF
+	;公開野外ライブ。長々と書くのもあれなのでCOMF74.ERBを参考に分岐を組み立てて
+	CASE 74
+		;れいぽぅされた
+		IF TFLAG:18 == 1 && S == 1
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;言葉責め
+	CASE 75
+		;調教者に主導権
+		IF !TFLAG:45
+			;バイブかアナルバイブが入っている
+			IF TEQUIP:11 || TEQUIP:13
+				;縛られている
+				IF TEQUIP:44
+					
+				;入ってるだけ
+				ELSE
+					
+				ENDIF
+			;何も入ってない
+			ELSE
+				;縛られている
+				IF TEQUIP:44
+					
+				;通常
+				ELSE
+					
+				ENDIF
+			ENDIF
+		;対象に主導権
+		ELSE
+			
+		ENDIF
+	;鰻風呂
+	CASE 78
+		;入る
+		IF TEQUIP:78
+			;実行者がミスティアの時、八目鰻風呂に派生
+			IF TFLAG:71 == 1
+				
+			;実行者が衣玖の時、電気鰻風呂に派生
+			ELSEIF TFLAG:71 == 2
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		;出る、残念ながらこちらもどの風呂だったかは取れない
+		ELSE
+			
+		ENDIF
+	;蟲風呂
+	CASE 79
+		;入る
+		IF TEQUIP:92
+			;実行者がリグル
+			IF NO:PLAYER == 24
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		;出る、リグルが実行者だったかは取れない
+		ELSE
+			
+		ENDIF
+	;イラマチオ
+	CASE 80
+	;フィストファック
+	CASE 81
+	;アナルフィスト
+	CASE 82
+	;両穴フィスト
+	CASE 83
+	;Ｇスポット刺激
+	CASE 84
+		;クスコで拡張中
+		IF TEQUIP:61
+			
+		;バイブからの派生（前回が指挿入れ）
+		ELSEIF TEQUIP:11 && PREVCOM == 8 && ABL:MASTER:2 >= 3
+			
+		;バイブからの派生（指挿入れ以外）
+		ELSEIF TEQUIP:11
+		
+		;ペニスパンド挿入からの派生
+		ELSEIF PREVCOM == 196
+			
+		;指挿入れからの派生
+		ELSEIF PREVCOM == 8
+			
+		;Ｇスポット刺激
+		ELSEIF PREVCOM == 84
+			
+		ENDIF
+	;放尿
+	CASE 85
+		;野外プレイ中
+		IF TEQUIP:54
+			
+		;羞恥プレイ中
+		ELSEIF TEQUIP:57
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;強制放尿
+	CASE 86
+		;羞恥プレイ中かつ着衣プレイ中でない
+		IF TEQUIP:57 && !TEQUIP:65
+			
+		;それ以外
+		ELSE
+			;着衣プレイ中
+			IF TEQUIP:65
+				;野外プレイ中
+				IF TEQUIP:54
+					
+				;着衣のみ
+				ELSE
+					
+				ENDIF
+			;着てない
+			ELSE
+				;野外プレイ中
+				IF TEQUIP:54
+					
+				;通常
+				ELSE
+					
+				ENDIF
+			ENDIF
+		ENDIF
+	;岩清水
+	CASE 87
+	;女体盛り
+	CASE 89
+		;女体盛りプレイ開始
+		IF TEQUIP:69
+			;刺身
+			IF TFLAG:77 == 1
+				
+			;スイーツ
+			ELSEIF TFLAG:77 == 2
+				
+			ENDIF
+		;終了
+		ELSE
+			
+		ENDIF
+	;アナル愛撫させる
+	CASE 90
+	;アナル奉仕強制
+	CASE 93
+	;触手変身
+	CASE 99
+	;触手召喚
+	CASE 100
+		;召喚
+		IF TEQUIP:90
+			
+		;送還
+		ELSE
+			
+		ENDIF
+	;触手口辱
+	CASE 108
+		;する
+		IF TEQUIP:98
+			
+		;終わる
+		ELSE
+			
+		ENDIF
+	;クスコ
+	CASE 110
+		;撮影中
+		IF TEQUIP:53
+			;羞恥プレイ中
+			IF TEQUIP:57
+				
+			;撮影のみ
+			ELSE
+				
+			ENDIF
+		;撮影中でない
+		ELSE
+			;羞恥プレイ中
+			IF TEQUIP:57
+				
+			;通常
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;クリトリス注射
+	CASE 111
+	;ヴァギナ注射
+	CASE 112
+		;クスコ拡張中
+		IF TEQUIP:61
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;アナル注射
+	CASE 113
+	;バスト注射
+	CASE 114
+	;お医者プレイ
+	CASE 115
+		;始める
+		IF TEQUIP:62
+			
+		;終わる
+		ELSE
+			
+		ENDIF
+	;触手同時責め
+	CASE 116
+		;触手変身
+		IF TEQUIP:89
+			
+		;触手召喚
+		ELSE
+			
+		ENDIF
+	;キス正常位
+	CASE 120
+		;前回のコマンドが性交系
+		IF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 20, 21, 24, 25, 34, 120, 121, 122, 123)
+			;前回のコマンドがキス正常位かキス対面座位
+			IF GROUPMATCH(PREVCOM, 120, 122)
+				
+			;前回のコマンドが正常位
+			ELSEIF PREVCOM == 20
+				
+			;他のコマンド
+			ELSE
+				
+			ENDIF
+		;通常
+		ELSE
+			
+		ENDIF
+	;キス後背位
+	CASE 121
+		;前回のコマンドが性交系
+		IF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 20, 21, 24, 25, 34, 120, 121, 122, 123)
+			;前回のコマンドがキス後背位かキス背面座位
+			IF GROUPMATCH(PREVCOM, 121, 123)
+				
+			;前回のコマンドが後背位
+			ELSEIF PREVCOM == 21
+				
+			;他のコマンド
+			ELSE
+				
+			ENDIF
+		;通常
+		ELSE
+			
+		ENDIF
+	;キス対面座位
+	CASE 122
+		;前回のコマンドが性交系
+		IF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 20, 21, 24, 25, 34, 120, 121, 122, 123)
+			;前回のコマンドがキス対面座位
+			IF PREVCOM == 122
+				
+			;前回のコマンドが正常位
+			ELSEIF PREVCOM == 120
+				
+			;前回のコマンドが対面座位
+			ELSEIF PREVCOM == 24
+				
+			;他のコマンド
+			ELSE
+				
+			ENDIF
+		;通常
+		ELSE
+			
+		ENDIF
+	;キス背面座位
+	CASE 123
+		;前回のコマンドが性交系
+		IF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 20, 21, 24, 25, 34, 120, 121, 122, 123)
+			;前回のコマンドがキス後背位かキス背面座位
+			IF GROUPMATCH(PREVCOM, 121, 123)
+				
+			;前回のコマンドが背面座位
+			ELSEIF PREVCOM == 25
+				
+			;他のコマンド
+			ELSE
+				
+			ENDIF
+		;通常
+		ELSE
+			
+		ENDIF
+	;キス騎乗位
+	CASE 124
+		;前回のコマンドが性交系
+		IF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 20, 21, 24, 25, 34, 120, 121, 122, 123)
+			;前回のコマンドがキス騎乗位
+			IF PREVCOM == 124
+				
+			;前回のコマンドがキス対面座位かキス背面座位
+			ELSEIF GROUPMATCH(PREVCOM, 122, 123)
+				
+			;前回のコマンドが騎乗位
+			ELSEIF PREVCOM == 34
+				
+			;前回のコマンドがキス正常位
+			ELSEIF PREVCOM == 120
+				
+			;他のコマンド
+			ELSE
+				
+			ENDIF
+		;通常
+		ELSE
+			
+		ENDIF
+	;膣酒呑み
+	CASE 128
+		;クスコ拡張中
+		IF TEQUIP:61
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;目隠しされる
+	CASE 130
+		;着ける
+		IF TEQUIP:PLAYER:43
+			
+		;外す
+		ELSE
+			
+		ENDIF
+	;拘束される
+	CASE 131
+		;縛る
+		IF TEQUIP:PLAYER:44
+			
+		;解く
+		ELSE
+			
+		ENDIF
+	;口枷される
+	CASE 132
+		;嵌める
+		IF TEQUIP:PLAYER:45
+			
+		;外す
+		ELSE
+			
+		ENDIF
+	;尻尾コキ、キャラによって地の文が違うのでCOMF140.ERBのチェックを勧める
+	CASE 140
+	;ウサ耳コキ、同上
+	CASE 146
+	;キャラ固有コマンド。気になるならTrain.csvの一覧からCOMF（コマンド番号）.ERBを調べて。
+	CASE 150 TO 172
+	;コンドーム
+	CASE 181
+		;調教者が着ける。この時、奉仕精神が高いと大幅に内容が変わるので注意
+		IF TFLAG:17 == 1
+			;着ける
+			IF TEQUIP:85
+				
+			;外す
+			ELSE
+				
+			ENDIF
+		;対象が着ける。こちらは調教者の奉仕精神が高いと大幅に内容が変わる
+		ELSEIF TFLAG:17 == 2
+			;着ける
+			IF TEQUIP:85
+				
+			;外す
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;コンドーム精飲（パートナー）、精液中毒のレベルで内容が大幅に変わる
+	CASE 182
+		SELECTCASE CFLAG:108
+			;調教者の精液
+			CASE 1
+				
+			;助手の精液
+			CASE 2
+				
+			;対象の精液
+			CASE 3
+				
+		ENDSELECT
+	;コンドーム精飲（助手）、
+	CASE 183
+		SELECTCASE CFLAG:108
+			;調教者の精液
+			CASE 1
+				
+			;助手の精液
+			CASE 2
+				
+			;対象の精液
+			CASE 3
+				
+		ENDSELECT
+	;コンドーム精飲（マスター）
+	CASE 184
+		SELECTCASE CFLAG:108
+			;調教者の精液
+			CASE 1
+				
+			;助手の精液
+			CASE 2
+				
+			;対象の精液
+			CASE 3
+				
+		ENDSELECT
+	;口移し
+	CASE 185
+		;調教者→対象
+		IF !ASSIPLAY
+			SELECTCASE CFLAG:108
+				;調教者の精液
+				CASE 1
+					
+				;助手の精液
+				CASE 2
+					
+				;対象の精液
+				CASE 3
+					
+			ENDSELECT
+		;助手→対象
+		ELSE
+			SELECTCASE CFLAG:108
+				;調教者の精液
+				CASE 1
+					
+				;助手の精液
+				CASE 2
+					
+				;対象の精液
+				CASE 3
+					
+			ENDSELECT
+		ENDIF
+	;排卵誘発剤
+	CASE 186
+		;調教者が飲む
+		IF TFLAG:17 == MASTER
+			;自分で飲む
+			IF !ASSIPLAY
+				
+			;助手→調教者
+			ELSE
+				
+			ENDIF
+		;助手が飲む
+		ELSEIF TFLAG:17 == ASSI
+			
+		;対象が飲む
+		ELSE
+			
+		ENDIF
+	;緊急避妊剤
+	CASE 187
+		;調教者が飲む
+		IF TFLAG:17 == MASTER
+			;自分で飲む
+			IF !ASSIPLAY
+				
+			;助手→調教者
+			ELSE
+				
+			ENDIF
+		;助手が飲む
+		ELSEIF TFLAG:17 == ASSI
+			
+		;対象が飲む
+		ELSE
+			;調教者→対象
+			IF !ASSIPLAY
+				
+			;助手→対象
+			ELSE
+				
+			ENDIF
+		ENDIF
+	;優しくする
+	CASE 190
+		SELECTCASE TFLAG:17
+			;頭を撫でる
+			CASE 0
+				
+			;目を手で覆う（羞恥プレイ中）
+			CASE 2
+				
+			;鏡の中の対象をじっと見つめる（羞恥プレイ中）
+			CASE 3
+				
+			;後ろから抱きしめる（羞恥プレイ中）
+			CASE 4
+				
+			;目元を舐める
+			CASE 5
+				
+			;臍を舌でねぶる
+			CASE 6
+				
+			;背筋を舐めあげる
+			CASE 7
+				
+			;腋に舌を這わせる
+			CASE 8
+				
+			;膝枕をする
+			CASE 9
+				
+			;首筋やうなじに舌を這わせる
+			CASE 10
+				
+			;後ろから抱きしめ、髪の香りを堪能する
+			CASE 11
+				
+			;耳元で愛を囁く
+			CASE 12
+				
+			;耳に息を吹きかけ、軽く舐めて耳たぶを甘噛みする
+			CASE 13
+				
+			;全身を優しく撫でさする
+			CASE 14
+				;ローションまみれにして撫でさする
+				IF PALAM:3 >= PALAMLV:4 && ITEM:25 > 0
+					
+				;通常
+				ELSE
+					
+				ENDIF
+			;対象の体に自分の体を擦りつける
+			CASE 15
+				;ローションで一緒にヌルヌルになる
+				IF PALAM:3 >= PALAMLV:4 && ITEM:25 > 0
+					
+				;通常
+				ELSE
+					
+				ENDIF
+			;くすぐる
+			CASE 16
+				
+		ENDSELECT
+	;手淫する（調教者→対象）
+	CASE 191
+	;パイズリする（調教者→対象）
+	CASE 192
+	;正常位させる（対象が調教者を犯す）
+	CASE 193
+		;抜かず連続で正常位させる
+		IF INSERT_CONTINUEABLE() && PREVCOM == 193
+			
+		;前回が後背位させるか騎乗位する
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 194, 195)
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;後背位させる（対象が調教者を犯す）
+	CASE 194
+		;抜かず連続で後背位させる
+		IF INSERT_CONTINUEABLE() && PREVCOM == 194
+			
+		;前回が正常位させるか騎乗位する
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 193, 195)
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;騎乗位する（調教者が対象の上に乗る）
+	CASE 195
+		;抜かず連続で騎乗位する
+		IF INSERT_CONTINUEABLE() && PREVCOM == 195
+			
+		;前回が正常位させるか後背位させる
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 193, 194)
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;ペニパン挿入
+	CASE 196
+		;クスコ拡張中
+		IF TEQUIP:61
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;お風呂で楽しむ
+	CASE 197
+		SELECTCASE TFLAG:17
+			;お湯を掬って対象にかける
+			CASE 0
+				
+			;体を洗ってあげる
+			CASE 1
+				
+			;一緒に湯船に入る
+			CASE 2
+				
+			;体を石鹸まみれにして対象に抱きつく
+			CASE 3
+				
+		ENDSELECT
+	;お外で楽しむ
+	CASE 198
+		SELECTCASE TFLAG:17
+			;景色のいい場所に連れていく
+			CASE 0
+				
+			;お弁当を食べる
+			CASE 1
+				
+			;散歩する
+			CASE 2
+				
+			;日向ぼっこする
+			CASE 3
+				
+		ENDSELECT
+	;お嫁さんで楽しむ
+	CASE 199
+		SELECTCASE TFLAG:17
+			;お姫様だっこする
+			CASE 0
+				
+			;エプロンの紐を引っ張る
+			CASE 1
+				
+			;ぎゅっと抱きしめる
+			CASE 2
+				
+			;名前を呼ぶ
+			CASE 3
+				
+			;じっと見つめる
+			CASE 4
+				
+		ENDSELECT
+	;乳の揉み合い
+	CASE 200
+	;指フェラ
+	CASE 201
+	;ワカメ酒
+	CASE 202
+		SELECTCASE W
+			;胸で
+			CASE 0
+				
+			;正座で
+			CASE 1
+				
+			;仰向けで
+			CASE 2
+				
+		ENDSELECT
+	;クスコされる（対象→調教者）
+	CASE 203
+		;調教者に主導権
+		IF !TFLAG:45
+			
+		;対象に主導権
+		ELSE
+			
+		ENDIF
+	;アナルに挿入させる
+	CASE 204
+		;抜かず連続でアナルに挿入させる
+		IF INSERT_CONTINUEABLE() && PREVCOM == 195
+			
+		;前回が正常位させるか後背位させる、または騎乗位させる
+		ELSEIF INSERT_CONTINUEABLE() && GROUPMATCH(PREVCOM, 193, 194, 195)
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;自慰見せつけ
+	CASE 205
+		;対象がさとりかつ恋慕だと読心自慰見せつけ
+		IF NO:TARGET == 81 && TALENT:恋慕
+			
+		;通常
+		ELSE
+			
+		ENDIF
+	;挿入Ｇスポ責め
+	CASE 255
+		;派生元
+		SELECTCASE PREVCOM
+			;正常位
+			CASE 20
+				
+			;後背位
+			CASE 21
+				
+			;対面座位
+			CASE 24
+				
+			;背面座位か乱れ牡丹
+			CASE 25, 88
+				
+			;騎乗位
+			CASE 34
+				
+		ENDSELECT
+	;挿入子宮口責め
+	CASE 256
+		;派生元
+		SELECTCASE PREVCOM
+			;正常位
+			CASE 20
+				
+			;後背位
+			CASE 21
+				
+			;対面座位
+			CASE 24
+				
+			;背面座位か乱れ牡丹
+			CASE 25, 88
+				
+			;騎乗位
+			CASE 34
+				
+		ENDSELECT
+	;剃毛プレイ
+	CASE 257
+		;調教者に主導権（対象を剃る）
+		IF !TFLAG:45
+			
+		;対象に主導権（調教者を剃る）
+		ELSE
+			
+		ENDIF
+	;口上独自ウフフ、独自が分かるぐらいならここに書くこともないとは思う
+	CASE 280 TO 284
+ENDSELECT
+
+
+

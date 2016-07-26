@@ -1,0 +1,240 @@
+;----------------------------------------------------------------
+;TRAIN_MESSAGE_PASSIVEMODE_PASSIVEPHASE_K112
+;パートナーのターン追加部分の地の文
+;基本は口上の雰囲気合わせやちょっとした追加。
+;----------------------------------------------------------------
+@TRAIN_MESSAGE_PASSIVEMODE_PASSIVEPHASE_K112(PREVCOM, COMMAND)
+#DIM COMMAND
+
+IF MARK:3
+	PRINTFORML %CALLNAME:TARGET%は不機嫌そうな雰囲気だ……
+	PRINTL
+ENDIF
+PRINTFORM %CALLNAME:TARGET%は
+SELECTCASE COMMAND
+	;臍を舐める
+	CASE 1
+		SIF TALENT:サド
+			PRINT うっすらと息を荒くしながら、
+		PRINTFORM %CALLNAME:PLAYER%のおへそを舌でねぶった
+	;背中を舐める
+	CASE 2
+		SIF TALENT:サド
+			PRINT ゆっくりと口角をつりあげながら、
+		PRINTFORM %CALLNAME:PLAYER%の背筋を舐め上げた
+	;首筋を舐める
+	CASE 3
+		SIF TALENT:サド
+			PRINT 心底楽しそうに
+		PRINTFORM %CALLNAME:PLAYER%の首筋やうなじに舌を這わせた
+	;耳を舐める
+	CASE 4
+		SIF TALENT:サド
+			PRINT にやにやとしながら
+		PRINTFORM %CALLNAME:PLAYER%の耳に息を吹きかけ、軽く舐めてから耳たぶを甘噛みした
+	;乳首を舐める
+	CASE 5
+		SIF TALENT:サド
+			PRINT 嘲るように
+		PRINTFORML %CALLNAME:PLAYER%の胸に顔を近付け、乳首に舌を這わせて吸い始めた
+	;前から抱きつく
+	CASE 6
+		SIF TALENT:恋慕
+			PRINTFORM 慈愛のこもった表情で\@ TALENT:親愛 ? 当然のように # 少し照れて \@
+		PRINTFORM 正面から%CALLNAME:PLAYER%に抱きついてきた
+	;後ろから抱きつく
+	CASE 7
+		SIF TALENT:恋慕
+			PRINTFORM 微笑みを漏らしながら\@ TALENT:親愛 ? 自然に # こっそりと \@
+		PRINTFORM 背後から%CALLNAME:PLAYER%の体を抱きしめてきた
+	;バードキス
+	CASE 8
+		IF TALENT:キス魔
+			PRINTFORM %CALLNAME:PLAYER%と何度も何度も軽く口づけあった
+		ELSE
+			PRINTFORM %CALLNAME:PLAYER%に軽く口づけた
+		ENDIF
+	;ソフトキス
+	CASE 9
+		PRINTFORM %CALLNAME:PLAYER%の口を、自分の口で塞\@ TALENT:恋慕 ? ぎ、うっとりとしている # いだ \@
+	;ディープキス
+	CASE 10
+		PRINTFORML %CALLNAME:PLAYER%の口腔を隅々まで舐め回し\@ TALENT:キス魔 ? 、唾液をかき回しながら # て \@ゆっくりと舌を絡ませてきた
+	;目元を舐める
+	CASE 11
+		SIF TALENT:恋慕
+			PRINT 愛おしそうに
+		PRINTFORM %CALLNAME:PLAYER%の目元を舐めた
+	;頭を撫でる
+	CASE 12
+		;母性取得は難易度が高いので恋慕で代用になりました。
+		SIF TALENT:恋慕
+			PRINTFORM ゆっくりと目を細めながら微笑んで
+		PRINTFORM %CALLNAME:PLAYER%の頭を撫でた
+	;膝枕をしてもらう
+	CASE 13
+		SIF TALENT:恋慕
+			PRINT 膝をぽんぽん、と叩いて
+		PRINTFORM %CALLNAME:PLAYER%に膝枕をしてくれた
+	;膝枕される
+	CASE 14
+		PRINTFORM 自らの頭を\@ TALENT:恋慕 ? 迷いなく # ゆっくりと \@%CALLNAME:PLAYER%の膝の上に乗せ
+		SIF TALENT:恋慕
+			PRINT 安心しきった表情で
+		PRINT 楽しんでいる
+	;愛を囁く
+	CASE 15
+		SIF TALENT:恋慕
+			PRINTFORM \@ TALENT:親愛 ? 笑みを浮かべながら # 顔をほんのりと赤く染め \@
+		PRINTFORM %CALLNAME:PLAYER%の耳元で愛を囁いた
+	;擽る
+	CASE 16
+		PRINTFORM \@ TALENT:サド ? いたずらっ子のように # 笑いながら \@%CALLNAME:PLAYER%を擽った
+	;寄り添う
+	CASE 17
+		PRINTFORM %CALLNAME:PLAYER%に寄り添
+		;上手くまとめられそうだが面倒なのでこれで
+		IF TALENT:恋慕
+			PRINTFORM い\@ TALENT:親愛 ? 力を抜きながら # 少し触れる程度に \@頭を乗せてきた
+		ELSE
+			PRINT った
+		ENDIF
+	;指フェラ
+	CASE 18
+		SIF TALENT:恋慕
+			PRINT 慈しむような表情で、
+		PRINTFORM %CALLNAME:PLAYER%の指を咥えて\@ TALENT:淫乱 ? 何度も何度も #  \@舐め回している
+	;指フェラさせられる
+	CASE 19
+		PRINTFORM 指を数本%CALLNAME:PLAYER%の口元へ差し込
+		IF TALENT:サド
+			PRINT んで、指の先で口の中を蹂躙するように激しく動かした
+		ELSEIF TALENT:恋慕
+			PRINT むと、優しく撫でるように撫で回した
+		ELSE
+			PRINT んだ
+		ENDIF
+	;髪の毛に顔を埋める
+	CASE 20
+		PRINTFORM %CALLNAME:PLAYER%を後ろから抱きしめ、\@ TALENT:淫乱 ? 身を捩らせながら #  \@髪の香りを堪能した
+	;微笑む
+	CASE 21
+		IF TALENT:親愛 && TALENT:相愛
+			PRINT 熱っぽい目をしながら
+		ELSEIF TALENT:親愛
+			PRINT 愛おしそうに
+		ELSEIF TALENT:恋慕
+			PRINT からかうように
+		ENDIF
+		PRINTFORM %CALLNAME:PLAYER%に微笑んだ
+	;談笑する
+	CASE 22
+		PRINTFORM %CALLNAME:PLAYER%に
+		;これ包む必要ある？
+		IF TALENT:恋慕
+			IF TALENT:相愛
+				PRINT いつも話しているように話しかけてきた
+			ELSEIF TALENT:親愛
+				PRINT 笑みを浮かべて話しかけてきた
+			ELSEIF TALENT:淫乱
+				PRINT 性についての話をしてきた
+			ELSE
+				PRINT 少し照れながら、他愛のない話をしてきた
+			ENDIF
+		ELSE
+			PRINT 話しかけてきた
+		ENDIF
+	;視姦
+	CASE 23
+		IF TALENT:サド
+			PRINT 背筋が凍るような冷たい目で
+		ELSEIF TALENT:淫乱
+			PRINT いやらしく笑みを浮かべ、
+		ELSEIF TALENT:恋慕
+			PRINT 目の中に熱を灯らせて
+		ENDIF
+		PRINTFORM %CALLNAME:PLAYER%の痴態を隅から隅まで舐めるように見ている
+	;尻を撫でる
+	CASE 24
+		PRINTFORM %CALLNAME:PLAYER%のお尻を\@ TALENT:サド ? いやらしく #  \@撫でてきた
+	;太ももを撫でる
+	CASE 25
+		PRINTFORM %CALLNAME:PLAYER%の太腿を\@ TALENT:恋慕 ? 優しく #  \@撫でてきた
+	;---------------------------------------------------------------------------------------
+	;デート
+	CASE 29
+		PRINT デートに行きたそうにしている
+	;押し倒される
+	CASE 30
+		PRINTFORM 突然%CALLNAME:PLAYER%を押し倒し、次々と服を脱がした
+	;--------------------------------------------------------------------------------------
+	;玉揉み
+	CASE 31
+		PRINTFORM %CALLNAME:PLAYER%の陰嚢に手を伸ばし\@ TALENT:サド ? 激 # 優 \@しく揉みほぐしてきた
+	;竿扱き
+	CASE 32
+		SIF TALENT:恋慕
+			PRINT 優しい目で
+		PRINTFORML \@ TALENT:淫乱 ? 期待を寄せて #  \@%CALLNAME:PLAYER%の目を見つめながら、
+		PRINTFORM \@ TALENT:淫乱 ? いやらしく #  \@丁寧に男性器をしごきあげた
+	;玉含み
+	CASE 33
+		PRINTFORM %CALLNAME:PLAYER%の玉袋を\@ TALENT:淫乱 ? 口の中に入れ、舐めまわした # 舐めまわし、吸い付いた \@
+	;フェラチオ
+	CASE 34
+		PRINTFORM %CALLNAME:PLAYER%のペニスを口に含み、\@ TALENT:淫乱 ? 激しく # ちろちろと上のほうを \@舐めまわした
+	;秘裂なぞり
+	CASE 35
+		PRINTFORM %CALLNAME:PLAYER%の秘所に手を伸ばし、指でゆっくりとなぞり始めた
+	;陰核擦り
+	CASE 36
+		SIF TALENT:淫乱
+			PRINT 期待に満ちた表情で
+		;気に入らないので修正するかもしれない。暫定
+		PRINTFORM %CALLNAME:PLAYER%の\@ TALENT:恋慕 ? 目を見つめながら # 軽く \@陰核を擦った
+	;秘裂クンニ
+	CASE 37
+		PRINTFORM %CALLNAME:PLAYER%の秘所に\@ TALENT:サド ? 激 # 優 \@しく舌を這わせた
+	;秘裂舌挿入
+	CASE 38
+		PRINTFORM %CALLNAME:PLAYER%の陰裂に口をつけ、舌を膣内に挿入した
+	;パイズリ
+	CASE 39
+		PRINTFORM %CALLNAME:PLAYER%のペニスを胸%BUST_WORD_K112("で包み込んで/を寄せて包むように/を押しつけるようにして")%こすっている
+	;性器の擦り合い
+	CASE 40
+		;兜合わせ
+		IF PENIS(PLAYER) && PENIS(TARGET)
+			PRINTFORM 自分のペニスを%CALLNAME:PLAYER%の陰茎に合わせて刺激している
+		;PLAYERのペニスがTARGETの太ももに挟まれる
+		ELSEIF PENIS(PLAYER)
+			PRINTFORM %CALLNAME:PLAYER%のペニスを太腿に挟み、腰を動かして擦っている
+		;TARGETのペニスがPLAYERの太ももに挟まれる
+		ELSEIF PENIS(TARGET)
+			PRINTFORM 自分のペニスを%CALLNAME:PLAYER%の太腿に挟み、\@ TALENT:淫乱 ? 激しく # ゆっくりと \@動かしている
+		;貝合わせ
+		ELSE
+			PRINTFORM 二人の秘所を合わせ、\@ TALENT:淫乱 ? 激しく # ゆっくりと \@動かし始めた
+		ENDIF
+	;顔面騎乗クンニ
+	CASE 41
+		PRINTFORM %CALLNAME:PLAYER%の顔面にまたがり、陰唇を舐めるように命令した
+	;顔面騎乗アナル
+	CASE 42
+		PRINTFORM %CALLNAME:PLAYER%の顔面にまたがって、お尻の穴を舐めるように命令した
+	;手で愛撫させる
+	CASE 43
+		PRINTFORM 自分の性器を%CALLNAME:PLAYER%の手で愛撫するように命令した
+	;胸を揉ませる
+	CASE 44
+		PRINTFORM %CALLNAME:PLAYER%の手をゆったりとした速さで%BUST_WORD_K112("豊かな/綺麗な/すらりとした")%胸に持っていった
+	;胸を舌で愛撫させる
+	CASE 45
+		PRINTFORM %CALLNAME:PLAYER%の口に胸を近づけ、口で奉仕するように誘惑している
+	;ぱふぱふ
+	CASE 46
+		PRINTFORM %CALLNAME:PLAYER%の顔%BUST_WORD_K112("を両側から胸で包み込んだ/を包むように胸を当てた/に押しつけるように胸を当てた")%
+ENDSELECT
+PRINTL ……
+PRINTL
+RETURN 1

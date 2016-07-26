@@ -1,0 +1,416 @@
+;-------------------------------------------------
+;CERTER用X軸調整関数@CENTERCUTIN
+;	引数ARG		：桁数。下に入れる改行の数。
+;	引数ARGS:n	：表示する文字。改行したい場合は一旦区切り、次の引数に続きを入れること。
+;
+;	つまりFULLCUTINで真ん中にするために横だけ揃えてくれるものです。
+;-------------------------------------------------
+@CENTERCUTIN(ARG, ARGS, ARGS:1 = "VOID", ARGS:2 = "VOID", ARGS:3 = "VOID", ARGS:4 = "VOID", ARGS:5 = "VOID", ARGS:6 = "VOID", ARGS:7 = "VOID", ARGS:8 = "VOID", ARGS:9 = "VOID", ARGS:10 = "VOID", ARGS:11 = "VOID", ARGS:12 = "VOID", ARGS:13 = "VOID", ARGS:14 = "VOID", ARGS:15 = "VOID", ARGS:16 = "VOID", ARGS:17 = "VOID", ARGS:18 = "VOID", ARGS:19 = "VOID", ARGS:20 = "VOID", ARGS:21 = "VOID", ARGS:22 = "VOID", ARGS:23 = "VOID", ARGS:24 = "VOID", ARGS:25 = "VOID", ARGS:26 = "VOID", ARGS:27 = "VOID", ARGS:28 = "VOID", ARGS:29 = "VOID", ARG:2 = 8)
+#DIMS ALI
+ALI '= CURRENTALIGN()
+ALIGNMENT CENTER
+CALL FULLCUTIN(0, ARG, ARGS, ARGS:1, ARGS:2, ARGS:3, ARGS:4, ARGS:5, ARGS:6, ARGS:7, ARGS:8, ARGS:9, ARGS:10, ARGS:11, ARGS:12, ARGS:13, ARGS:14, ARGS:15, ARGS:16, ARGS:17, ARGS:18, ARGS:19, ARGS:20, ARGS:21, ARGS:22, ARGS:23, ARGS:24, ARGS:25, ARGS:26, ARGS:27, ARGS:28, ARGS:29, ARG:2)
+CALL ALIGNMENTS(ALI)
+RETURN RESULT
+
+;-------------------------------------------------
+;FADEOUT用Y軸調整関数@FADEOUTLINE
+;	引数ARG		：桁数。下に入れる改行の数。
+;	引数ARG:1	：コマ数
+;	引数ARGS:n	：表示する文字。改行したい場合は一旦区切り、次の引数に続きを入れること。
+;
+;-------------------------------------------------
+@FADEOUTLINE(ARG, ARG:1, ARGS, ARGS:1 = "VOID", ARGS:2 = "VOID", ARGS:3 = "VOID", ARGS:4 = "VOID", ARGS:5 = "VOID", ARGS:6 = "VOID", ARGS:7 = "VOID", ARGS:8 = "VOID", ARGS:9 = "VOID", ARGS:10 = "VOID", ARGS:11 = "VOID", ARGS:12 = "VOID", ARGS:13 = "VOID", ARGS:14 = "VOID", ARGS:15 = "VOID", ARGS:16 = "VOID", ARGS:17 = "VOID", ARGS:18 = "VOID", ARGS:19 = "VOID", ARGS:20 = "VOID", ARGS:21 = "VOID", ARGS:22 = "VOID", ARGS:23 = "VOID", ARGS:24 = "VOID", ARGS:25 = "VOID", ARGS:26 = "VOID", ARGS:27 = "VOID", ARGS:28 = "VOID", ARGS:29 = "VOID")
+#DIM WORDS
+FOR LOCAL, 0, 30
+	SIF ARGS:LOCAL != "VOID"
+		WORDS++
+NEXT
+FOR LOCAL, WORDS, ARG + WORDS
+	ARGS:LOCAL '= " "
+NEXT
+CALL FADEOUT(ARG:1, ARGS, ARGS:1, ARGS:2, ARGS:3, ARGS:4, ARGS:5, ARGS:6, ARGS:7, ARGS:8, ARGS:9, ARGS:10, ARGS:11, ARGS:12, ARGS:13, ARGS:14, ARGS:15, ARGS:16, ARGS:17, ARGS:18, ARGS:19, ARGS:20, ARGS:21, ARGS:22, ARGS:23, ARGS:24, ARGS:25, ARGS:26, ARGS:27, ARGS:28, ARGS:29, 0)
+RETURN RESULT
+
+;-------------------------------------------------
+;FADEIN用横幅調整関数@FADEINLINE
+;	引数ARG		：桁数
+;	引数ARG:1	：コマ数
+;	引数ARGS:n	：表示する文字。改行したい場合は一旦区切り、次の引数に続きを入れること。
+;
+;-------------------------------------------------
+@FADEINLINE(ARG, ARG:1, ARGS, ARGS:1 = "VOID", ARGS:2 = "VOID", ARGS:3 = "VOID", ARGS:4 = "VOID", ARGS:5 = "VOID", ARGS:6 = "VOID", ARGS:7 = "VOID", ARGS:8 = "VOID", ARGS:9 = "VOID", ARGS:10 = "VOID", ARGS:11 = "VOID", ARGS:12 = "VOID", ARGS:13 = "VOID", ARGS:14 = "VOID", ARGS:15 = "VOID", ARGS:16 = "VOID", ARGS:17 = "VOID", ARGS:18 = "VOID", ARGS:19 = "VOID", ARGS:20 = "VOID", ARGS:21 = "VOID", ARGS:22 = "VOID", ARGS:23 = "VOID", ARGS:24 = "VOID", ARGS:25 = "VOID", ARGS:26 = "VOID", ARGS:27 = "VOID", ARGS:28 = "VOID", ARGS:29 = "VOID")
+#DIM WORDS
+FOR LOCAL, 0, 30
+	SIF ARGS:LOCAL != "VOID"
+		WORDS++
+NEXT
+FOR LOCAL, WORDS, ARG + WORDS
+	ARGS:LOCAL '= " "
+NEXT
+CALL FADEIN(ARG:1, ARGS, ARGS:1, ARGS:2, ARGS:3, ARGS:4, ARGS:5, ARGS:6, ARGS:7, ARGS:8, ARGS:9, ARGS:10, ARGS:11, ARGS:12, ARGS:13, ARGS:14, ARGS:15, ARGS:16, ARGS:17, ARGS:18, ARGS:19, ARGS:20, ARGS:21, ARGS:22, ARGS:23, ARGS:24, ARGS:25, ARGS:26, ARGS:27, ARGS:28, ARGS:29)
+RETURN RESULT
+
+;-------------------------------------------------
+;FADEIN用横幅調整関数@FADEINLINE
+;	引数ARGS	：ALIGNMENTの指定。"LEFT", "CENTER", "RIGHT"のどれか。
+;
+;	文字列としてALIGNMENTの取得が出来ても指定は出来なかったので。
+;-------------------------------------------------
+@ALIGNMENTS(ARGS)
+SELECTCASE ARGS
+	CASE "LEFT"
+		ALIGNMENT LEFT
+	CASE "CENTER"
+		ALIGNMENT CENTER
+	CASE "RIGHT"
+		ALIGNMENT RIGHT
+	CASEELSE
+		THROW 指定外の文字列が指定されました！　文字列：%ARGS%
+ENDSELECT
+RETURN RESULT
+
+;-------------------------------------------------
+;横幅調整関数@CENTERLINE
+;	引数ARGS	：真ん中にしたい文字列の数。文字列をそのまんま入れるとよし。
+;
+;	FADEOUTとかで文字数が代わるとずれるのでそれを簡単にするために。
+;-------------------------------------------------
+;真ん中に表示する場合の空白数を返す関数
+@CENTERLINE(ARGS)
+#FUNCTION
+RETURNF (STRLENS(GETLINESTR(" ")) / 2) - STRLENS(ARGS) / 2
+
+;-------------------------------------------------
+;衣装所持判定用関数@HAVE_COSTUME
+;	引数ARGS	：衣装名。
+;	返り値		：0or1, 持っていれば1。
+;
+;	悲しいことに本体はビット管理だったので……ちなみに学ランは0ビット目だ。
+;-------------------------------------------------
+@HAVE_COSTUME(ARGS)
+#FUNCTION
+{
+	LOCALS '= "学ラン_セーラー服_ブルマ_水着_スクール水着（紺）_スクール水着（白）"
+	+ "_白衣_ナース服_女性警察官制服_ボンテージスーツ_浴衣_巫女服_博麗霊夢のコスプレ"
+	+ "_東風谷早苗のコスプレ_メイド服_十六夜咲夜のコスプレ_リボン_小悪魔風衣装"
+	+ "魔法少女コスチューム_ゴシックロリータ衣装_バニーガール_Yシャツ_普段着"
+	+ "%CALLNAME:MASTER%の服"
+}
+;名前がないとエラー投げる
+SIF !STRCOUNT(LOCALS, ARGS)
+	THROW 服の名前の指定が間違っています！　服の名前：%ARGS%
+SPLIT LOCALS, "_", LOCALS
+;パッチに対する一時的な対応
+SIF ITEMNAME:201 == ""
+	RETURNF GETBIT(FLAG:70, FINDELEMENT(LOCALS, ARGS))
+RETURNF ITEM:(201 + FINDELEMENT(LOCALS, ARGS))
+
+;-------------------------------------------------
+;調教メンバー判定関数@TRAIN_MEMBER
+;	引数ARG	：居るかどうか調べたいキャラのNO。キャラ番号（キャラ登録番号ではない）を入れる。
+;	返り値	：0or1。居れば1。
+;
+;-------------------------------------------------
+;ARGに指定したキャラがASSIかMASTERに居た場合に1を返す関数。
+;妹様口上を参考に、あれは入ってないといけないから使えない……というわけで自作
+@TRAIN_MEMBER(ARG)
+#FUNCTION
+SIF NO:MASTER == ARG || ASSINO() == ARG
+	RETURNF 1
+RETURNF 0
+
+;-------------------------------------------------
+;複数素質判定関数@TALENTGROUP
+;	引数ARG	：素質を持ってるどうか調べたいキャラのNO。キャラ登録番号（キャラ番号ではない）を入れる。
+;	引数ARG:n:素質の番号。
+;	返り値	：素質を持っている数。
+;
+;-------------------------------------------------
+@TALENTGROUP(ARG, ARG:1 = -1, ARG:2 = -1, ARG:3 = -1, ARG:4 = -1, ARG:5 = -1, ARG:6 = -1, ARG:7 = -1, ARG:8 = -1, ARG:9 = -1, ARG:10 = -1, ARG:11 = -1, ARG:12 = -1, ARG:13 = -1, ARG:14 = -1, ARG:15 = -1, ARG:16 = -1, ARG:17 = -1, ARG:18 = -1, ARG:19 = -1, ARG:20 = -1, ARG:21 = -1, ARG:22 = -1, ARG:23 = -1, ARG:24 = -1, ARG:25 = -1, ARG:26 = -1, ARG:27 = -1, ARG:28 = -1, ARG:29 = -1, ARG:30 = -1, ARG:31 = -1, ARG:32 = -1, ARG:33 = -1, ARG:34 = -1, ARG:35 = -1, ARG:36 = -1, ARG:37 = -1, ARG:38 = -1, ARG:39 = -1, ARG:40 = -1, ARG:41 = -1, ARG:42 = -1, ARG:43 = -1, ARG:44 = -1, ARG:45 = -1, ARG:46 = -1, ARG:47 = -1, ARG:48 = -1, ARG:49 = -1, ARG:50 = -1, ARG:51 = -1, ARG:52 = -1, ARG:53 = -1, ARG:54 = -1, ARG:55 = -1, ARG:56 = -1, ARG:57 = -1, ARG:58 = -1, ARG:59 = -1, ARG:60 = -1, ARG:61 = -1, ARG:62 = -1, ARG:63 = -1, ARG:64 = -1, ARG:65 = -1, ARG:66 = -1, ARG:67 = -1, ARG:68 = -1, ARG:69 = -1, ARG:70 = -1, ARG:71 = -1, ARG:72 = -1, ARG:73 = -1, ARG:74 = -1, ARG:75 = -1, ARG:76 = -1, ARG:77 = -1, ARG:78 = -1, ARG:79 = -1, ARG:80 = -1, ARG:81 = -1, ARG:82 = -1, ARG:83 = -1, ARG:84 = -1, ARG:85 = -1, ARG:86 = -1, ARG:87 = -1, ARG:88 = -1, ARG:89 = -1, ARG:90 = -1, ARG:91 = -1, ARG:92 = -1, ARG:93 = -1, ARG:94 = -1, ARG:95 = -1, ARG:96 = -1, ARG:97 = -1, ARG:98 = -1, ARG:99 = -1)
+#FUNCTION
+#DIM LCOUNT, 2
+VARSET LCOUNT
+FOR LCOUNT, 1, 100
+	SIF ARG:LCOUNT == -1
+		BREAK
+	SIF TALENT:ARG:(ARG:LCOUNT)
+		LCOUNT:1++
+NEXT
+
+RETURNF LCOUNT:1
+
+;-------------------------------------------------
+;複数調教装備判定関数@TEQUIPGROUP
+;	引数ARG	：TEQUIPを装着しているかどうか調べたいキャラのNO。キャラ登録番号（キャラ番号ではない）を入れる。
+;	引数ARG:n:TEQUIPの番号。
+;	返り値	：装着している数。
+;
+;	主にどれか一つでも装備していてはいけないのを簡単にする用
+;-------------------------------------------------
+;ARG以降で指定したTEQUIPがある数を返す関数。主にどれか一つでも装備していてはいけないのを簡単にする用
+@TEQUIPGROUP(ARG = -1, ARG:1 = -1, ARG:2 = -1, ARG:3 = -1, ARG:4 = -1, ARG:5 = -1, ARG:6 = -1, ARG:7 = -1, ARG:8 = -1, ARG:9 = -1, ARG:10 = -1, ARG:11 = -1, ARG:12 = -1, ARG:13 = -1, ARG:14 = -1, ARG:15 = -1, ARG:16 = -1, ARG:17 = -1, ARG:18 = -1, ARG:19 = -1, ARG:20 = -1, ARG:21 = -1, ARG:22 = -1, ARG:23 = -1, ARG:24 = -1, ARG:25 = -1, ARG:26 = -1, ARG:27 = -1, ARG:28 = -1, ARG:29 = -1, ARG:30 = -1, ARG:31 = -1, ARG:32 = -1, ARG:33 = -1, ARG:34 = -1, ARG:35 = -1, ARG:36 = -1, ARG:37 = -1, ARG:38 = -1, ARG:39 = -1, ARG:40 = -1, ARG:41 = -1, ARG:42 = -1, ARG:43 = -1, ARG:44 = -1, ARG:45 = -1, ARG:46 = -1, ARG:47 = -1, ARG:48 = -1, ARG:49 = -1, ARG:50 = -1, ARG:51 = -1, ARG:52 = -1, ARG:53 = -1, ARG:54 = -1, ARG:55 = -1, ARG:56 = -1, ARG:57 = -1, ARG:58 = -1, ARG:59 = -1, ARG:60 = -1, ARG:61 = -1, ARG:62 = -1, ARG:63 = -1, ARG:64 = -1, ARG:65 = -1, ARG:66 = -1, ARG:67 = -1, ARG:68 = -1, ARG:69 = -1, ARG:70 = -1, ARG:71 = -1, ARG:72 = -1, ARG:73 = -1, ARG:74 = -1, ARG:75 = -1, ARG:76 = -1, ARG:77 = -1, ARG:78 = -1, ARG:79 = -1, ARG:80 = -1, ARG:81 = -1, ARG:82 = -1, ARG:83 = -1, ARG:84 = -1, ARG:85 = -1, ARG:86 = -1, ARG:87 = -1, ARG:88 = -1, ARG:89 = -1, ARG:90 = -1, ARG:91 = -1, ARG:92 = -1, ARG:93 = -1, ARG:94 = -1, ARG:95 = -1, ARG:96 = -1, ARG:97 = -1, ARG:98 = -1, ARG:99 = -1)
+#FUNCTION
+#DIM LCOUNT, 2
+VARSET LCOUNT
+FOR LCOUNT, 0, 100
+	SIF ARG:LCOUNT == -1
+		BREAK
+	SIF TEQUIP:(ARG:LCOUNT)
+		LCOUNT:1++
+NEXT
+
+RETURNF LCOUNT:1
+
+
+
+;-------------------------------------------------
+;人間判定関数@IS_HUMAN
+;	引数ARG	：人間かどうか調べたいキャラ。キャラ登録番号（キャラ番号ではない）を入れる。
+;				ただし-1でTARGET, 0でMASTERのNOを代わりに調べる。
+;				初期値は-1(= TARGET)。
+;	返り値	：0or1, 人間であれば1
+;
+;-------------------------------------------------
+;ARG(初期値-1)で指定したキャラが人間であるかチェック。-1を送るとTARGET, 0でMASTER、それ以外でキャラ登録番号入力として、人間だったら返す
+@IS_HUMAN(ARG = -1)
+#FUNCTION
+RETURNF GROUPMATCH(NO:(IS_SYSTEM(ARG)), 1, 2, 9, 48, 49, 50) 
+
+;-------------------------------------------------
+;妖怪判定関数@IS_YOKAI
+;	引数ARG	：妖怪かどうか調べたいキャラ。キャラ登録番号（キャラ番号ではない）を入れる。
+;				ただし-1でTARGET, 0でMASTERのNOを代わりに調べる。
+;				初期値は-1(= TARGET)。
+;	返り値	：0or1, 妖怪であれば1
+;
+;	素質からそれっぽいものを持っているキャラクターをチェックするだけなので抜けがあるかもしれません。
+;-------------------------------------------------
+@IS_YOKAI(ARG = -1)
+#FUNCTION
+RETURNF TALENTGROUP(IS_SYSTEM(ARG), 90, 93, 114, 119, 124, 128, 149, 213, 214, 215)
+
+;-------------------------------------------------
+;動物判定関数@IS_ANIMAL
+;	引数ARG	：動物かどうか調べたいキャラ。キャラ登録番号（キャラ番号ではない）を入れる。
+;				ただし-1でTARGET, 0でMASTERのNOを代わりに調べる。
+;				初期値は-1(= TARGET)。
+;	返り値	：0or1, 動物であれば1
+;
+;	素質からそれっぽいものを持っているキャラクターをチェックするだけなので抜けがあるかもしれません。
+;-------------------------------------------------
+@IS_ANIMAL(ARG = -1)
+#FUNCTION
+;RETURNF TALENT:ARG:90 || TALENT:ARG:93 || TALENT:ARG:124 || TALENT:ARG:213 || TALENT:ARG:214 || TALENT:ARG:215
+RETURNF TALENTGROUP(IS_SYSTEM(ARG), 90, 93, 124, 213, 214, 215)
+
+;-------------------------------------------------
+;地霊殿組判定関数@IS_CHIREIDEN
+;	引数ARG	：地霊殿組かどうか調べたいキャラ。キャラ登録番号（キャラ番号ではない）を入れる。
+;				ただし-1でTARGET, 0でMASTERのNOを代わりに調べる。
+;				初期値は-1(= TARGET)。
+;	返り値	：0or1, 地霊殿組であれば1
+;
+;-------------------------------------------------
+@IS_CHIREIDEN(ARG = -1)
+#FUNCTION
+RETURNF GROUPMATCH(NO:(IS_SYSTEM(ARG)), 77, 78, 79, 80, 81, 82, 83, 84)
+
+;-------------------------------------------------
+;命蓮寺組判定関数@IS_MYORENJI
+;	引数ARG	：命蓮寺組かどうか調べたいキャラ。キャラ登録番号（キャラ番号ではない）を入れる。
+;				ただし-1でTARGET, 0でMASTERのNOを代わりに調べる。
+;				初期値は-1(= TARGET)。
+;	返り値	：0or1, 命蓮寺組であれば1
+;
+;-------------------------------------------------
+;命蓮寺キャラ
+@IS_MYORENJI(ARG = -1)
+#FUNCTION
+RETURNF GROUPMATCH(NO:(IS_SYSTEM(ARG)), 91, 93, 94, 95, 96)
+
+;-------------------------------------------------
+;魔法使い判定関数@IS_WITCH
+;	引数ARG	：魔法使いかどうか調べたいキャラ。キャラ登録番号（キャラ番号ではない）を入れる。
+;				ただし-1でTARGET, 0でMASTERのNOを代わりに調べる。
+;				初期値は-1(= TARGET)。
+;	返り値	：0or1, 魔法使いであれば1
+;
+;	フランドールは魔法少女をモチーフに作られているらしいので一応入っている。
+;	夢見教授は科学魔法を魔法使いに入れていいのか分からなかったため入っていない。
+;-------------------------------------------------
+@IS_WITCH(ARG = -1)
+#FUNCTION
+;魔理沙、パチュリー、フランドール（魔法少女だとおまけ.txtで）、アリス、ユキ、マイ
+RETURNF GROUPMATCH(NO:(IS_SYSTEM(ARG)), 2, 8, 11, 14, 59, 60)
+
+;-------------------------------------------------
+;内部関数@IS_SYSTEM
+;	引数ARG	：キャラ登録番号。
+;	返り値	：キャラ登録番号。ただし-1の時はTARGET, 0の時はMASTERを返す。
+;
+;	内部で使う以外の利点もあまりないと思いますがそのまま使えなくもありません。
+;-------------------------------------------------
+;上のTARGETとかMASTERを返すシステム
+@IS_SYSTEM(ARG)
+#FUNCTION
+
+SELECTCASE ARG
+	CASE -1
+		RETURNF TARGET
+	CASE 0
+		RETURNF MASTER
+	CASEELSE
+		SIF GETCHARA(NO:ARG) == -1
+			THROW エラー：対象が正しく指定されていません！
+		RETURNF ARG
+ENDSELECT
+
+THROW エラー：あり得ない挙動です！
+
+;TCVARを利用した調教終了でリセットされるFIRSTTIMESみたいなのを作る……？
+;呼び出される→TCVARが0ならCSTRリセット＆TCVARを1に→終了でTCVARが0に。
+;数値ならもうPANCTIONがあるんだよなあ
+
+;-------------------------------------------------
+;衣装所持判定用グループ関数@COSTUME_GROUP
+;	引数ARGS	：衣装の種類名。"学生服", "水着", "巫女服", "メイド服"だけ。
+;	返り値		：0or1, 持っていれば1。
+;
+;	悲しいことに色々と種類があったので……
+;-------------------------------------------------
+;複数ある衣装のジャンル分け、持ってるものがあれば1を返す
+@COSTUME_GROUP(ARGS)
+#FUNCTION
+
+SELECTCASE ARGS
+	CASE "学生服"
+		RETURNF HAVE_COSTUME("学ラン") || HAVE_COSTUME("セーラー服")
+	CASE "水着"
+		RETURNF HAVE_COSTUME("ブルマ") || HAVE_COSTUME("水着") || HAVE_COSTUME("スク水（紺）") || HAVE_COSTUME("スク水（白）")
+	CASE "巫女服"
+		RETURNF HAVE_COSTUME("巫女服") || HAVE_COSTUME("巫女服（博）") || HAVE_COSTUME("巫女服（守）")
+	CASE "メイド服"
+		RETURNF HAVE_COSTUME("メイド服") || HAVE_COSTUME("メイド服（紅）")
+ENDSELECT
+
+;-------------------------------------------------
+;調教者同一判定関数@PLAYER_EQUAL
+;	返り値		：0or1, 前回と調教者が同じであれば1。
+;
+;-------------------------------------------------
+@PLAYER_EQUAL()
+#FUNCTION
+
+RETURNF ASSIPLAY == TFLAG:50
+
+;-------------------------------------------------
+;胸サイズ分岐関数@BUST_WORD_K112
+;	ARGS		："巨乳の場合/普通の場合/貧乳の場合"という風に入れる。
+;	ARGS:1		：区切り文字。初期値は"/"。
+;	返り値		：0or1, 前回と調教者が同じであれば1。
+;
+;-------------------------------------------------
+;送られた文字列を指定された文字で区切った後、胸の大きさに応じた文字を返す
+;"巨乳/普通/貧乳"と並べて送る。
+@BUST_WORD_K112(ARGS, ARGS:1 = "/")
+#FUNCTIONS
+
+SPLIT ARGS, ARGS:1, LOCALS
+
+SIF TALENT:巨乳
+	RETURNF LOCALS:0
+SIF TALENT:貧乳
+	RETURNF LOCALS:2
+RETURNF LOCALS:1
+
+;-------------------------------------------------
+;乱数初回判定関数@ONCERAND
+;	ARG		：RAND:nのnの部分のように乱数の大きさを入れる。100まで可。
+;	ARGS	：判別用文字。文字ごとに選ばれた乱数があるかどうかを判定している。
+;	返り値	：RAND:ARG。ただし一度選ばれた乱数は選ばれない。
+;
+;	一回の起動で10000より多く別々の文字で判定しようとするとエラーが出ると思われる。
+;	また、再起動すると保存が失われ、判定が最初からになる。
+;	全ての乱数が選ばれた場合、判定をリセットする。
+;-------------------------------------------------
+;一度選ばれた乱数を全て選ばれるまで二度選ばない関数。
+;ARGに乱数の数(0～100)を入れ、ARGSに判別用の文字列を入れる。
+;本体のリセットで初期化される。
+@ONCERAND(ARG, ARGS)
+#FUNCTION
+#DIM LCOUNT
+#DIM SEARCH_RESULT
+#DIM SAVEFLAG, 10000, 100
+#DIMS CHECK_ARGS, 10000
+
+LOCAL = 0
+;ARGSで指定した文字列が今までに一度も入っていない
+IF FINDLASTELEMENT(CHECK_ARGS, ARGS, 0, , 1) == -1
+	;文字列が入っている最後の次の場所にARGSを代入
+	SEARCH_RESULT = FINDLASTELEMENT(CHECK_ARGS, ".", 0) + 1
+	CHECK_ARGS:SEARCH_RESULT '= ARGS
+	;乱数が選ばれたことを保存する。
+	LOCAL = RAND:ARG
+	SAVEFLAG:SEARCH_RESULT:LOCAL = 1
+;あった
+ELSE
+	;文字列が入っている場所をSEARCH_RESULTに。
+	SEARCH_RESULT = FINDLASTELEMENT(CHECK_ARGS, ARGS, 0, , 1)
+	;全ての乱数が選択されたかチェック。
+	FOR LCOUNT, 0, ARG
+		LOCAL += SAVEFLAG:SEARCH_RESULT:LCOUNT
+	NEXT
+	;全ての乱数が選択されていればリセット。
+	IF ARG == LOCAL
+		FOR LCOUNT, 0, ARG
+			SAVEFLAG:SEARCH_RESULT:LCOUNT = 0
+		NEXT
+	ENDIF
+	;乱数取得の処理。
+	WHILE 1
+		;乱数を取得。
+		LOCAL = RAND:ARG
+		;選ばれたことのある乱数ならやり直し。
+		SIF SAVEFLAG:SEARCH_RESULT:LOCAL == 1
+			CONTINUE
+		BREAK
+	WEND
+	;選ばれた乱数を記憶。
+	SAVEFLAG:SEARCH_RESULT:LOCAL = 1
+ENDIF
+RETURNF LOCAL
+
+;-------------------------------------------------
+;偏り乱数関数@BIASRAND
+;	ARG		：RAND:nのnの部分のように乱数の大きさを入れる。
+;	ARGS	：偏りの文字。"低", "中", "高"を指定し、その通りに偏らせる。
+;	返り値	：RAND:ARG。ただし指定された通りに偏る。
+;
+;-------------------------------------------------
+@BIASRAND(ARG, ARGS)
+#FUNCTION
+
+SELECTCASE ARGS
+	CASE "低"
+		;乱数二つを掛け合わせたものを平方する。
+		RETURNF SQRT(RAND:ARG * RAND:ARG)
+	CASE "中"
+		;乱数二つを足し合わせたものを2で割る。
+		RETURNF (RAND:ARG + RAND:ARG) / 2
+	CASE "高"
+		;乱数の最大値から乱数のBIASRANDの"低"で得られた乱数を引く。
+		RETURNF ARG - BIASRAND(ARG, "低")
+ENDSELECT
+;無かったらエラー飛ばす。
+THROW ARGSで指定された文字列が変です！　内容:%ARGS%
+
+;-------------------------------------------------
+;負乱数関数@BIASRAND
+;	ARG		：RAND:nのnの部分のように乱数の大きさを入れる。
+;	返り値	：RAND:ARG。ただし * -1するため負になる。
+;
+;-------------------------------------------------
+@NEGARAND(ARG)
+#FUNCTION
+RETURNF RAND:ARG * -1

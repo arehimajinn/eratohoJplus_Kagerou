@@ -1,0 +1,124 @@
+;----------------------------------------------------------------
+;KOJO_MESSAGE_PASSIVEMODE_PASSIVEPHASE_K112
+;パートナーのターン追加部分の口上
+;----------------------------------------------------------------
+@KOJO_MESSAGE_PASSIVEMODE_PASSIVEPHASE_K112(PREVCOM, COMMAND)
+#DIM COMMAND
+
+IF MARK:3
+	PRINTFORML 「%"……" * (1 + RAND:3)%」
+	RETURN 1
+ENDIF
+
+SELECTCASE COMMAND
+	;臍を舐める
+	CASE 1
+		PRINTL 「ん……かわいい顔をするのね」
+	;背中を舐める
+	CASE 2
+		PRINTL 「ちゅる……ちゅ……顔が見れないのが残念……」
+	;首筋を舐める
+	CASE 3
+		PRINTL 「んふふ、だぁいじょうぶ、取って食べるわけじゃないわ」
+	;耳を舐める
+	CASE 4
+		PRINTL 「はむ……ちゅ……震えるほど気持ちいいの？」
+	;乳首を舐める
+	CASE 5
+		PRINTL 「ここ、弱いのね……ちる……ちゅう」
+	;前から抱きつく
+	CASE 6
+		PRINTFORML 「\@ DAY:2 == 1 ? 少し熱いわね # あったかい \@……」
+	;後ろから抱きつく
+	CASE 7
+		PRINTFORML 「ふふっ……貴\@ TALENT:オトコ ? 方 # 女 \@は今どんな顔をしているの？」
+	;バードキス
+	CASE 8
+		IF TALENT:キス魔
+			PRINTL 「ん……もっと……」
+		ELSE
+			PRINTL 「……ふふふっ」
+		ENDIF
+	;ソフトキス
+	CASE 9
+		
+	;ディープキス
+	CASE 10
+	;目元を舐める
+	CASE 11
+	;頭を撫でる
+	CASE 12
+	;膝枕をしてもらう
+	CASE 13
+	;膝枕される
+	CASE 14
+	;愛を囁く
+	CASE 15
+	;擽る
+	CASE 16
+	;寄り添う
+	CASE 17
+	;指フェラ
+	CASE 18
+	;指フェラさせられる
+	CASE 19
+	;髪の毛に顔を埋める
+	CASE 20
+	;微笑む
+	CASE 21
+	;談笑する
+	CASE 22
+	;視姦
+	CASE 23
+	;尻を撫でる
+	CASE 24
+	;太ももを撫でる
+	CASE 25
+	;---------------------------------------------------------------------------------------
+	;デート
+	CASE 29
+	;押し倒される
+	CASE 30
+	;--------------------------------------------------------------------------------------
+	;玉揉み
+	CASE 31
+	;竿扱き
+	CASE 32
+	;玉含み
+	CASE 33
+	;フェラチオ
+	CASE 34
+	;秘裂なぞり
+	CASE 35
+	;陰核擦り
+	CASE 36
+	;秘裂クンニ
+	CASE 37
+	;秘裂舌挿入
+	CASE 38
+	;パイズリ
+	CASE 39
+	;性器の擦り合い
+	CASE 40
+		;兜合わせ
+		IF PENIS(PLAYER) && PENIS(TARGET)
+		;PLAYERのペニスがTARGETの太ももに挟まれる
+		ELSEIF PENIS(PLAYER)
+		;TARGETのペニスがPLAYERの太ももに挟まれる
+		ELSEIF PENIS(TARGET)
+		;貝合わせ
+		ELSE
+		ENDIF
+	;顔面騎乗クンニ
+	CASE 41
+	;顔面騎乗アナル
+	CASE 42
+	;手で愛撫させる
+	CASE 43
+	;胸を揉ませる
+	CASE 44
+	;胸を舌で愛撫させる
+	CASE 45
+	;ぱふぱふ
+	CASE 46
+ENDSELECT

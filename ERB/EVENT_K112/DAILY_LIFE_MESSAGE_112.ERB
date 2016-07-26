@@ -1,0 +1,114 @@
+;--------------------------------------------------
+;日常イベント口上
+;-変数
+;ARG　キャラ番号（NOでない）が入っている。
+;日常イベントで選ばれた時、TARGETでない可能性も大いに有り得るため
+;TALENT:ARG:素質名などで対応する。が、今回は省くための処理を追加して省いている。参考にどうぞ。
+;-仕様
+;一時的にTARGETを入れ替え、ARGを省いている。終了時にはTARGETを戻すが
+;バグらないことを祈る。
+;--------------------------------------------------
+@DAILY_LIFE_MESSAGE_112(ARG)
+
+SWAP TARGET, ARG
+;体力1000以下かつ夜。月光浴持ち想定。晴れかどうかは本体でも気にしてないのでスルー
+IF BASE:0 <= 1000 && TIME
+	PRINTFORMW ふと窓の外から見える屋根のてっぺんに、%CALLNAME:TARGET%がいるのが見えた
+	PRINTFORMW どうやら月を見上げているようだ……
+	PRINTFORM \@ TALENT:恋慕 ? すぐに # 少しして \@こちらに気付
+	;反発感情持ち
+	IF MARK:反発感情
+		PRINTFORMW くと、顔を背けて\@ MARK:3 == 3 ? ゆっくりと # 走り \@去った……
+	;既成事実Lv2以上
+	ELSEIF MARK:既成事実 >= 2 && PERCENT(50)
+		PRINTFORMW くと、\@ TALENT:恋慕 || TALENT:魅力 ? 魅力的な微笑みを # 微笑んで \@みせた……
+		SIF TALENT:魅力
+			PRINTW 気を抜くと、その笑みに魅入られてしまいそうだ……
+		PRINTL
+		PRINTFORMW 「\@ TALNET:恋慕 && !TALENT:月光浴 && PERCENT(50) ? 身体に悪いわ、休んだほうが良いんじゃない # 一緒に月見する \@？」
+	;それ以外
+	ELSE
+		PRINTW いたようだが、特に気にせず月見を続けている……
+	ENDIF
+;体力1000以下で恋慕または既成事実2以上
+ELSEIF BASE:0 <= 1000 && (TALENT:恋慕 || MARK:既成事実 >= 2)
+	PRINTFORMW 通りすがりにふと%CALLNAME:TARGET%の部屋を覗いてみた……
+	SELECTCASE RAND:(TALENT:魅力 && PERCENT(20) ? 5 # 4)
+		CASE 0
+			PRINTW 露出がまるで無かった服装が、激しく乱れたまま寝ている……
+		CASE 1
+			PRINTW 安心しきった安らかな顔で眠っている……
+		CASE 2
+			PRINTW 眠ったまま笑っている。どこか不気味だ……
+		CASE 3
+			PRINTFORMW 寝言で%CALLNAME:MASTER%の名前を呼んでいる……
+			PRINTL
+			PRINTFORMW 「%CALLNAME:MASTER%……」
+		;魅力持ち
+		CASE 4
+			PRINTW 丸まって寝ているその姿に、抗いがたい何かを感じる……
+	ENDSELECT
+;体力1000以下
+ELSEIF BASE:0 <= 1000
+	PRINTFORMW 通りすがりにふと%CALLNAME:TARGET%の部屋を覗いてみた……
+	PRINTFORMW %CALLNAME:TARGET%はベッドで眠っているようだ
+	;反発感情持ち
+	SIF MARK:反発感情
+		PRINTW しかし、警戒からかその姿勢はとても堅いものだ……
+;体力1000以上
+ELSE
+	CALL DAILY_LIFE_MESSAGE(TARGET)
+	SELECTCASE RESULT
+		;歌の練習
+		CASE 1
+			SELECTCASE ABL:歌唱技能
+				;人並み
+				CASE 1
+					PRINTW 練習の邪魔をしないよう、そそくさと通り過ぎた……
+				;上手
+				CASE 2
+					PRINTW その歌声に後ろ髪を引かれたが、邪魔をしないために通り過ぎた……
+				;とても上手
+				CASE 3
+					PRINTW つい足を止め、部屋の前でそれを聞き続けていた……
+					PRINTW ふと気が付くと歌声が止んでいた。どうやら練習は終わったようだ……
+				;プロぐらい？
+				CASE 4
+					PRINTW 扉に耳を当ててじっと聞いてみると、素晴らしい歌が聞こえてきた……
+				;プロでも上手い方？
+				CASE IS < 20 
+					PRINTW 扉越しにでも人々を魅了しそうな歌だ……
+					PRINTW その場でそっと聞き耳を立てることにした……
+				;もうこれ以上無いというぐらい
+				CASEELSE
+					PRINTW その歌声に感動し、つい扉を開けてしまった……
+					PRINTFORMW ……が、気づかれていないようだ。そのまま%CALLNAME:MASTER%は部屋に入り歌を聞くことにした……
+					PRINTL
+					PRINTW ………
+					PRINTW ……
+					PRINTW …
+					PRINTL 
+					PRINTW 「どうだった？」
+					PRINTFORM 終わったようなので感想を伝えると、\@ PERCENT(50) ? なにやら悩み # 嬉しそうにし \@だした……
+			ENDSELECT
+		;実験or原料育成
+		CASE 4
+		;お漏らしする
+		CASE 6
+		;庭を歩く
+		CASE 8
+		;料理をつくる・いろいろ分岐
+		CASE 24
+		;月見
+		CASE 26
+		;夜間見回り中に遭遇
+		CASE 27
+		;SM調教の練習
+		CASE 28
+		;それ以外
+		CASE 29
+	ENDSELECT
+ENDIF
+
+SWAP TARGET, ARG
+RETURN 1
