@@ -259,8 +259,6 @@ IF TFLAG:600 == 0 && CFLAG:220 == 0
 			CFLAG:330 = 2
 		CASE 2
 			PRINTW デフォルトのままにします。
-			TALENT:貧乳 = 0
-			TALENT:巨乳 = 1
 			CFLAG:330 = 3
 		CASE 8310141
 			IF LOCAL == 1
@@ -3236,71 +3234,64 @@ ENDIF
 ;----------------------------------------------------------------
 IF TFLAG:13 == 99
 	PRINTL
-	;自慰してくれない
-	IF SELECTCOM == 3
-		PRINTW 「嫌よ、そんな恥ずかしいこと」
-	;キスしてくれない(ウフフ時用)
-	ELSEIF SELECTCOM == 6
-		PRINTW 「こんな時にしたく、ないわ……」
-	;バイブ拒否(通常・アナル)
-	ELSEIF SELECTCOM == 11 || SELECTCOM == 13
-		PRINTW 「そんなもの挿れたくないわよ」
-	;セックスさせてくれない(正常位、後背位、対面座位、背面座位)
-	ELSEIF (SELECTCOM >= 20 && SELECTCOM <= 25) && SELECTCOM != 23
-		PRINTW 「今は……ごめんなさい」
-	;逆レイプしてくれない
-	ELSEIF SELECTCOM == 23
-		PRINTW 「こっちからするなんて……嫌、だわ」
-	;奉仕してくれない(フェラチオ・パイズリ・素股・騎乗位)
-	ELSEIF (SELECTCOM >= 31 && SELECTCOM <= 34) || SELECTCOM == 37
-		PRINTW 「そんなことをしたくないわ」
-	;野外プレイしてくれない
-	ELSEIF SELECTCOM == 54
-		PRINTW 「外でなんて嫌よ！」
-	;対助手関係(犯す・キス)
-	ELSEIF SELECTCOM == 56 || SELECTCOM == 60
-		PRINTW 「そんなこと……その人には、したくないわ」
-	;足コキしてくれない
-	ELSEIF SELECTCOM == 67
-		PRINTW 「足っ！？　無理よ！」
-	;シックスナインしてくれない
-	ELSEIF SELECTCOM == 69
-		PRINTW 「恥ずかしいわよそんなの……」
-	;スク水プレイしてくれない
-	ELSEIF SELECTCOM == 73
-		PRINTW 「そんな恥ずかしいもの着たくないわ」
-	;イラマチオ失敗
-	ELSEIF SELECTCOM == 80
-		PRINTW 「苦しいのは嫌よ」
-	;まったり出来ない
-	ELSEIF SELECTCOM == 304
-		PRINTW 「そんなことしてる場合じゃないでしょう？」
-	;家事手伝ってくれない
-	ELSEIF SELECTCOM == 305
-		PRINTW 「今は手一杯なの」
-	;髪に触れない(指・櫛)
-	ELSEIF SELECTCOM == 306 || SELECTCOM == 307
-		PRINTW 「やめてくれるかしら？」
-	;素材探せない
-	ELSEIF SELECTCOM == 309
-		PRINTW 「そんなガラクタを拾ってる暇はないの」
-	;遊び・デートに誘えない
-	ELSEIF SELECTCOM == 321 || SELECTCOM == 323
-		PRINTFORMW 「今は\@ FLAG:28 ? そんな状況じゃないでしょう # そんなことしたくないの \@」
-	;キスさせてくれない(バード・ソフト・ディープ)
-	ELSEIF SELECTCOM >= 340 && SELECTCOM <= 342
-		PRINTW 「今はまだ、したくないわ」
-	;愛撫させてくれない(胸・通常)
-	ELSEIF SELECTCOM >= 360 && SELECTCOM <= 361
-		PRINTW 「いや、やめて！」
-	;着衣セックスさせてくれない(正常位、後背位、騎乗位) Gスポット刺激(=364)には判定が無い模様
-	;淫乱がないと実行対象にならないみたい…
-	ELSEIF SELECTCOM >= 362 && SELECTCOM <= 365
-		PRINTW 「着たままなんて嫌、脱いでから……ね」
-	;その他のコマンド全般で拒否口上を出す場合
-	ELSE
-		PRINTW 「嫌、よ」
+	IF MARK:反発刻印
+		PRINTL 「……」
+		PRINTFORMW %CALLNAME:TARGET%は鋭い目つきでこちらを睨んでいる…
 	ENDIF
+	SELECTCASE SELECTCOM
+		;自慰してくれない
+		CASE 3
+			PRINTW 「嫌よ、そんなの」
+		;キスしてくれない(ウフフ時用)
+		CASE 6
+			PRINTW 「こんな時にしたく、ないわ……」
+		;バイブ拒否(通常・アナル)
+		CASE 11, 13
+			PRINTW 「そんなもの挿れたくないわよ」
+		;セックスさせてくれない(正常位・後背位・対面座位・背面座位・騎乗位)
+		CASE 20, 21, 24, 25, 33
+			PRINTW 「今は……ごめんなさい」
+		;逆レイプしてくれない
+		CASE 23
+			PRINTW 「こっちからするなんて……いや」
+		;奉仕してくれない(手淫・フェラチオ・パイズリ・素股・足コキ・尻素股・オナホ手淫)
+		CASE 31 TO 33, 37 TO 39
+			PRINTW 「そんなことしたくないわ」
+		;野外プレイしてくれない
+		CASE 54
+			PRINTW 「外は、ちょっと……」
+		;スク水プレイしてくれない
+		CASE 73
+			PRINTW 「そんなの、着たくないわ」
+		;イラマチオ失敗
+		CASE 80
+			PRINTW 「苦しいのは嫌なの」
+		;まったり出来ない
+		CASE 304
+			PRINTW 「そんなことしてる場合じゃないでしょう？」
+		;家事をしてくれない
+		CASE 305
+			PRINTW 「今は忙しいの」
+		;髪に触れられない(指・櫛)
+		CASE 306 TO 307
+			PRINTW 「やめてくれる？」
+		;素材を探せない
+		CASE 309
+			PRINTW 「ガラクタ集めをしてる暇はないの」
+		;遊び・デートに誘えない
+		CASE 321, 323
+			PRINTFORMW 「今は\@ FLAG:28 ? そんな状況じゃないでしょう # そんなことしたくないわ \@」
+		;キスさせてくれない(バード・ソフト・ディープ)
+		CASE 340 TO 342
+			PRINTW 「……嫌」
+		;着衣セックスさせてくれない(正常位、後背位、騎乗位) Gスポット刺激(=364)には判定が無い模様
+		;淫乱がないと実行対象にならないみたい…
+		CASE 362 TO 365
+			PRINTW 「服が汚れるわ」
+		;その他のコマンド全般で拒否口上を出す場合
+		CASEELSE
+			PRINTW 「嫌、よ」
+	ENDSELECT
 	PRINTL
 ENDIF
 
