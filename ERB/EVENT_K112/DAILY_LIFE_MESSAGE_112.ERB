@@ -25,7 +25,7 @@ IF BASE:0 <= 1000 && TIME
 		SIF TALENT:魅力
 			PRINTW 気を抜くと、その笑みに魅入られてしまいそうだ……
 		PRINTL
-		PRINTFORMW 「\@ TALNET:恋慕 && !TALENT:月光浴 && PERCENT(50) ? 身体に悪いわ、休んだほうが良いんじゃない # 一緒に月見する \@？」
+		PRINTFORMW 「\@ TALNET:恋慕 && !TALENT:MASTER:月光浴 && PERCENT(50) ? 身体に悪いわ、休んだほうが良いんじゃない # 一緒に月見する \@？」
 	;それ以外
 	ELSE
 		PRINTW いたようだが、特に気にせず月見を続けている……
@@ -89,12 +89,16 @@ ELSE
 					PRINTW …
 					PRINTL 
 					PRINTW 「どうだった？」
-					PRINTFORM 終わったようなので感想を伝えると、\@ PERCENT(50) ? なにやら悩み # 嬉しそうにし \@だした……
+					PRINTFORMW 終わったようなので感想を伝えると、\@ PERCENT(50) ? なにやら悩み # 嬉しそうにし \@だした……
 			ENDSELECT
 		;実験or原料育成
 		CASE 4
+			PRINTW 「ここは……で、これを…………」
 		;お漏らしする
 		CASE 6
+			;一人の時のみ
+			SIF TFLAG:601
+				PRINTW 「……はぁっ」
 		;庭を歩く
 		CASE 8
 		;料理をつくる・いろいろ分岐
