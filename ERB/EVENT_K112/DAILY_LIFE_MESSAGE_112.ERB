@@ -8,11 +8,11 @@
 ;一時的にTARGETを入れ替え、ARGを省いている。終了時にはTARGETを戻すが
 ;バグらないことを祈る。
 ;--------------------------------------------------
-@DAILY_LIFE_MESSAGE_112(ARG)
-
-SWAP TARGET, ARG
-;体力1000以下かつ夜。月光浴持ち想定。晴れかどうかは本体でも気にしてないのでスルー
-IF BASE:0 <= 1000 && TIME
+@DAILY_LIFE_MESSAGE_112(TARGET_BACKUP)
+#DIM TARGET_BACKUP
+SWAP TARGET, TARGET_BACKUP
+;体力1000以下かつ夜かつ晴れ。月光浴持ち想定
+IF BASE:体力 <= 1000 && IS_TIMEZONE("夜") && WEATHER_GROUP("晴れ")
 	PRINTFORMW ふと窓の外から見える屋根のてっぺんに、%CALLNAME:TARGET%がいるのが見えた
 	PRINTFORMW どうやら月を見上げているようだ……
 	PRINTFORM \@ TALENT:恋慕 ? すぐに # 少しして \@こちらに気付
@@ -21,19 +21,19 @@ IF BASE:0 <= 1000 && TIME
 		PRINTFORMW くと、顔を背けて\@ MARK:3 == 3 ? ゆっくりと # 走り \@去った……
 	;既成事実Lv2以上
 	ELSEIF MARK:既成事実 >= 2 && PERCENT(50)
-		PRINTFORMW くと、\@ TALENT:恋慕 || TALENT:魅力 ? 魅力的な微笑みを # 微笑んで \@みせた……
-		SIF TALENT:魅力
+		PRINTFORMW くと、\@ TALENT:恋慕 ? 魅力的な微笑みを # 微笑んで \@みせた……
+		SIF TALENT:恋慕
 			PRINTW 気を抜くと、その笑みに魅入られてしまいそうだ……
 		PRINTL
-		PRINTFORMW 「\@ TALNET:恋慕 && !TALENT:MASTER:月光浴 && PERCENT(50) ? 身体に悪いわ、休んだほうが良いんじゃない # 一緒に月見する \@？」
+		PRINTFORMW 「\@ TALENT:恋慕 && TALENT:MASTER:月光浴 && PERCENT(50) ? 身体に悪いわ、休んだほうが良いんじゃない # 一緒に月見する \@？」
 	;それ以外
 	ELSE
 		PRINTW いたようだが、特に気にせず月見を続けている……
 	ENDIF
 ;体力1000以下で恋慕または既成事実2以上
-ELSEIF BASE:0 <= 1000 && (TALENT:恋慕 || MARK:既成事実 >= 2)
+ELSEIF BASE:体力 <= 1000 && (TALENT:恋慕 || MARK:既成事実 >= 2)
 	PRINTFORMW 通りすがりにふと%CALLNAME:TARGET%の部屋を覗いてみた……
-	SELECTCASE RAND:(TALENT:魅力 && PERCENT(20) ? 5 # 4)
+	SELECTCASE ONCERAND(TALENT:魅力 && PERCENT(20) ? 5 # 4)
 		CASE 0
 			PRINTW 露出がまるで無かった服装が、激しく乱れたまま寝ている……
 		CASE 1
@@ -49,7 +49,7 @@ ELSEIF BASE:0 <= 1000 && (TALENT:恋慕 || MARK:既成事実 >= 2)
 			PRINTW 丸まって寝ているその姿に、抗いがたい何かを感じる……
 	ENDSELECT
 ;体力1000以下
-ELSEIF BASE:0 <= 1000
+ELSEIF BASE:体力 <= 1000
 	PRINTFORMW 通りすがりにふと%CALLNAME:TARGET%の部屋を覗いてみた……
 	PRINTFORMW %CALLNAME:TARGET%はベッドで眠っているようだ
 	;反発感情持ち
@@ -101,6 +101,15 @@ ELSE
 				PRINTW 「……はぁっ」
 		;庭を歩く
 		CASE 8
+			PRINTW 不意に立ち止まると、その場で背伸びをしているようだ
+			IF TALENT:恋慕
+				;昼
+				IF IS_TIMEZONE("昼")
+					PRINTW 
+				;夜
+				ELSE
+				ENDIF
+			ENDIF
 		;料理をつくる・いろいろ分岐
 		CASE 24
 		;月見
@@ -113,6 +122,5 @@ ELSE
 		CASE 29
 	ENDSELECT
 ENDIF
-
-SWAP TARGET, ARG
+SWAP TARGET, TARGET_BACKUP
 RETURN 1

@@ -2,22 +2,22 @@
 ;K112_ANIMATION.ERB
 ;アニメーション関係の関数をぶち込んである。
 ;----------------------------------------------------------------
-@OPENING_ANIMATION_K112(ARG = 0)
-#DIM LCOUNT
-#DIM LINE
+@OPENING_ANIMATION_K112(ENDING_FLAG = 0)
+#DIM ENDING_FLAG
 #DIM MOON
+#DIM MOON_LOOP
 #DIM UNDER
+#DIM PRINT_LOOP
+#DIM WAIT_LOOP
 
 CALL SAVELINE
 REDRAW 0
 ;まず邪魔なのを画面の外に
-FOR LINE, 0, 150
-	PRINTL
-NEXT
+CALL NEWLINE(150)
 
 ;月の移り変わりの表示
 MOON = 0
-FOR LCOUNT, 0, 29
+FOR MOON_LOOP, 0, 29
 	SETCOLOR GETDEFCOLOR()
 	PRINTFORM %" " * CENTERLINE("あ")%
 	SELECTCASE MOON
@@ -40,36 +40,32 @@ FOR LCOUNT, 0, 29
 			PRINTL 🌘
 	ENDSELECT
 	;繰り返した回数分だけ改行（上限13行）
-	FOR LINE, 0, MIN(LCOUNT + 1, 13)
-		PRINTL
-	NEXT
+	CALL NEWLINE(MIN(MOON_LOOP + 1, 13))
 	MOON++
 	SIF MOON == 8
 		MOON = 0
 	TWAIT 300, 1
 	;満月時に一旦ストップ
-	SIF LCOUNT == 16
+	SIF MOON_LOOP == 16
 		TWAIT 1500, 1
 	;最後以外は表示を一回一回消す
-	SIF LCOUNT != 28
-		CLEARLINE MIN(LINE + 1, 14)
+	SIF MOON_LOOP != 28
+		CLEARLINE MIN(MOON_LOOP + 1, 14)
 NEXT
 
 ;7行上に
-FOR LINE, 0, 7
+FOR WAIT_LOOP, 0, 7
 	PRINTL
 	TWAIT 150, 1
 NEXT
 ;月と下三行を残す
 CLEARLINE 17
 ;The episode ofの表示。タイピングばりに。
-FOR LCOUNT, 0, STRLENS("The episode of") + 1
+FOR PRINT_LOOP, 0, STRLENS("The episode of") + 1
 	;_をちらちらさせて入力してるっぽく
 	FOR UNDER, 0, 2
-		PRINTFORML %" " * CENTERLINE("The episode of　　　　　　　") + SUBSTRING("The episode of", 0, LCOUNT)%\@ UNDER ?  # _ \@
-		FOR LINE, 0, 16
-			PRINTL
-		NEXT
+		PRINTFORML %" " * CENTERLINE("The episode of　　　　　　　") + SUBSTRING("The episode of", 0, PRINT_LOOP)%\@ UNDER ?  # _ \@
+		CALL NEWLINE(16)
 		TWAIT 100, 1
 		CLEARLINE 17
 	NEXT
@@ -78,29 +74,25 @@ PRINTFORML %" " * CENTERLINE("The episode of　　　　　　　") + "The episo
 
 ;"lonely werewolf"の表示処理
 ;大体上と一緒
-FOR LCOUNT, 0, STRLENS("\"lonely werewolf\"") + 1
+FOR PRINT_LOOP, 0, STRLENS("\"lonely werewolf\"") + 1
 	FOR UNDER, 0, 2
-		PRINTFORML %" " * CENTERLINE("\"lonely werewolf\"") + "　　" + SUBSTRING("\"lonely werewolf\"", 0, LCOUNT)%\@ UNDER ? _ #  \@
-		FOR LINE, 0, 15
-			PRINTL
-		NEXT
+		PRINTFORML %" " * CENTERLINE("\"lonely werewolf\"") + "　　" + SUBSTRING("\"lonely werewolf\"", 0, PRINT_LOOP)%\@ UNDER ? _ #  \@
+		CALL NEWLINE(15)
 		TWAIT 100, 1
 		CLEARLINE 16
 	NEXT
 NEXT
 ;上に表示する
 PRINTFORML %" " * CENTERLINE("\"lonely werewolf\"") + "　　" + "\"lonely werewolf\""%
-FOR LCOUNT, 0, 15
-	PRINTL
-NEXT
-
+CALL NEWLINE(15)
 TWAIT 1000, 1
+
 ;一回消してフェードアウト処理で表示しながら消す。
 CLEARLINE 21
 CALL FADEOUTLINE(15, 8, " " * CENTERLINE("あ") + "🌕", "", "", "", " " * CENTERLINE("The episode of　　　　　　　") + "The episode of　　　　　　　", " " * CENTERLINE("\"lonely werewolf\"") + "　　" + "\"lonely werewolf\"")
 CLEARLINE 21
 ;エンディングから呼び出されていなければ終了処理
-IF !ARG
+IF !ENDING_FLAG
 	REDRAW 1
 	CALL RETURNLINE
 	RETURN RESULT
@@ -111,18 +103,14 @@ CALL FADEINLINE(13, 8, "This is an old version. Update")
 TWAIT 100, 1
 CLEARLINE 14
 ;...の表示。
-FOR LCOUNT, 0, 3
-	PRINTFORML This is an old version. Update%"." * (1 + LCOUNT)%
-	FOR LINE, 0, 13
-		PRINTL
-	NEXT
+FOR PRINT_LOOP, 0, 3
+	PRINTFORML This is an old version. Update%"." * (1 + PRINT_LOOP)%
+	CALL NEWLINE(13)
 	TWAIT 500, 1
 	CLEARLINE 14
 NEXT
 
-FOR LINE, 0, 13
-	PRINTL
-NEXT
+CALL NEWLINE(13)
 
 ;更新終わりのフェードアウト
 CALL FADEOUTLINE(13, 8, "This is an old version. Update...")
@@ -134,42 +122,36 @@ CALL FADEINLINE(15, 8, " " * CENTERLINE("あ") + "🌕", "", "", "", " " * CENTE
 CLEARLINE 16
 
 ;"lonely werewolf"を"werewolf and you!"分消す。そしてしばらく点滅させる
-FOR LCOUNT, 0, STRLENS("　　" + "\"werewolf and you!\"") - 1
+FOR PRINT_LOOP, 0, STRLENS("　　" + "\"werewolf and you!\"") - 1
 	FOR UNDER, 0, 2
-		PRINTFORML %SUBSTRING(" " * CENTERLINE("\"lonely werewolf\"") + "　　" + "\"lonely werewolf\"", 0, STRLENS(" " * CENTERLINE("\"lonely werewolf\"") + "　　" + "\"lonely werewolf\"") - MIN(LCOUNT, STRLENS("　　" + "\"werewolf and you!\"") - 6))%\@ UNDER ? _ #  \@
-		FOR LINE, 0, 15
-			PRINTL
-		NEXT
+		PRINTFORML %SUBSTRING(" " * CENTERLINE("\"lonely werewolf\"") + "　　" + "\"lonely werewolf\"", 0, STRLENS(" " * CENTERLINE("\"lonely werewolf\"") + "　　" + "\"lonely werewolf\"") - MIN(PRINT_LOOP, STRLENS("　　" + "\"werewolf and you!\"") - 6))%\@ UNDER ? _ #  \@
+		CALL NEWLINE(15)
 		TWAIT 150, 1
 		CLEARLINE 16
 	NEXT
 NEXT
 
 ;"werewolf and you!"の表示
-FOR LCOUNT, 0, STRLENS("　　" + "\"werewolf and you!\"")
+FOR PRINT_LOOP, 0, STRLENS("　　" + "\"werewolf and you!\"")
 	FOR UNDER, 0, 2
-		PRINTFORML %" " * CENTERLINE("\"lonely werewolf\"") + "　　" + SUBSTRING("\"werewolf and you!\"", 0, LCOUNT)%\@ UNDER ? _ #  \@
-		FOR LINE, 0, 15
-			PRINTL
-		NEXT
+		PRINTFORML %" " * CENTERLINE("\"lonely werewolf\"") + "　　" + SUBSTRING("\"werewolf and you!\"", 0, PRINT_LOOP)%\@ UNDER ? _ #  \@
+		CALL NEWLINE(15)
 		TWAIT 200, 1
 		CLEARLINE 16
 	NEXT
 NEXT
 PRINTFORML %" " * CENTERLINE("\"lonely werewolf\"") + "　　" + "\"werewolf and you!\""%
-FOR LINE, 0, 15
-	PRINTL
-NEXT
+CALL NEWLINE(15)
 
 ;月を動かす前のWAITと画面をまっさらにする処理
 TWAIT 1300, 1
 CLEARLINE 21
 
 ;月を動かす
-FOR LCOUNT, 0, 5
-	CLEARLINE !LCOUNT ? 0 # 21
+FOR MOON_LOOP, 0, 5
+	CLEARLINE !MOON_LOOP ? 0 # 21
 	PRINTFORM %" " * CENTERLINE("あ")%
-	SELECTCASE LCOUNT
+	SELECTCASE MOON_LOOP
 		CASE 0
 			PRINTL 🌕
 		CASE 1
@@ -182,14 +164,10 @@ FOR LCOUNT, 0, 5
 			SETCOLOR 0xFFFF00
 			PRINTL 🌑
 	ENDSELECT
-	PRINTL
-	PRINTL
-	PRINTL
+	CALL NEWLINE(3)
 	PRINTFORML %" " * CENTERLINE("The episode of　　　　　　　") + "The episode of"%
 	PRINTFORML %" " * CENTERLINE("\"lonely werewolf\"") + "　　" + "\"werewolf and you!\""%
-	FOR LINE, 0, 15
-		PRINTL
-	NEXT
+	CALL NEWLINE(15)
 	TWAIT 500, 1
 NEXT
 TWAIT 2000, 1
@@ -210,9 +188,9 @@ RETURN RESULT
 ;----------------------------------------------------------------
 @ENDING_ANIMATION_K112
 #DIM COLOR
-#DIM LCOUNT, 2
-#DIM LINE
 #DIM UNDER
+#DIM NEWLINE_VALUE
+#DIM STAFF_ROLL
 #DIMS TEXT, 40
 
 ;描画のちらつきカット
@@ -224,13 +202,11 @@ CALL CENTERCUTIN(13, "―― True Ending 「孤独？なウェアウルフ」")
 SETCOLOR 0xFFFF00
 CALL CENTERCUTIN(13, "原作：ＺＵＮ", "　『東方Projectシリーズ』")
 SETCOLOR GETDEFCOLOR()
-FOR LCOUNT, 0, 150
-	PRINTL
-NEXT
+CALL NEWLINE(150)
 
 ;スタッフロール（一覧）
-FOR LCOUNT, 0, 50
-	SELECTCASE LCOUNT
+FOR STAFF_ROLL, 0, 50
+	SELECTCASE STAFF_ROLL
 		CASE 0
 			ALIGNMENT CENTER
 			FONTBOLD
@@ -266,13 +242,13 @@ CLEARLINE 50
 ALIGNMENT LEFT
 
 ;謝辞。カラー付きで
-FOR LCOUNT, 0, 6
-	SELECTCASE LCOUNT
+FOR STAFF_ROLL, 0, 6
+	SELECTCASE STAFF_ROLL
 		CASE 0
 			;明るい赤
 			SETCOLOR 0xFF8080
 			TEXT:0 '= "関係者皆様への謝辞"
-			LINE = 9
+			NEWLINE_VALUE = 9
 		CASE 1
 			;イメージカラー：Indianred/まんまかもしれないけど赤に黒を混ぜたようなイメージ。姉のほうはScarlet-Redでそのまんまなのでそっくりなのかも
 			;Darkredでも良かったんだけど見栄えが悪い。あとぱっと見正常に見えるしこっちで
@@ -281,7 +257,7 @@ FOR LCOUNT, 0, 6
 			TEXT:2 '= "数々の参考資料や考え方を（勝手に）いただいたり、"
 			TEXT:3 '= "この口上の影狼のイメージの一部は影響を（勝手に）受けていたりします。"
 			TEXT:4 '= "本当にありがとうございました！"
-			LINE = 11
+			NEWLINE_VALUE = 11
 		CASE 2
 			;イメージカラー：lincoln yellow/都会派っぽい色。
 			SETCOLOR 0xFFE60F
@@ -309,13 +285,13 @@ FOR LCOUNT, 0, 6
 			TEXT:4 '= "そしてこのような素晴らしいバリアントを作っていただき、"
 			TEXT:5 '= "本当にありがとうございました！"
 	ENDSELECT
-	CALL CENTERCUTIN(LINE, TEXT:0, TEXT:1, TEXT:2, TEXT:3, TEXT:4, TEXT:5)
+	CALL CENTERCUTIN(NEWLINE_VALUE, TEXT:0, TEXT:1, TEXT:2, TEXT:3, TEXT:4, TEXT:5)
 	TEXT:0 '= "", " ", "", "", "", ""
 NEXT
 
 ;プレイしてくれてありがとう！　の表示。無駄に七色
-FOR LCOUNT, 0, STRLENSU("Thank you for playing!") + 1 + (7 * 2) + 1
-	SIF STRLENSU("Thank you for playing!") == LCOUNT - 1
+FOR STAFF_ROLL, 0, STRLENSU("Thank you for playing!") + 16
+	SIF STRLENSU("Thank you for playing!") == STAFF_ROLL - 1
 		COLOR = 0
 	COLOR++
 	;赤・橙・黄・緑・青・藍・紫。ゴリ押し
@@ -335,20 +311,16 @@ FOR LCOUNT, 0, STRLENSU("Thank you for playing!") + 1 + (7 * 2) + 1
 		CASE 7, 19
 			SETCOLOR 0x6600CC
 	ENDSELECT
-	IF STRLENSU("Thank you for playing!") >= LCOUNT + 1
+	IF STRLENSU("Thank you for playing!") >= STAFF_ROLL + 1
 		FOR UNDER, 0, 2
-			PRINTFORML %" " * CENTERLINE("Thank you for playing!") + SUBSTRING("Thank you for playing!", 0, LCOUNT)%\@ UNDER ?  # _ \@
-			FOR LINE, 0, 13
-				PRINTL
-			NEXT
+			PRINTFORML %" " * CENTERLINE("Thank you for playing!") + SUBSTRING("Thank you for playing!", 0, STAFF_ROLL)%\@ UNDER ?  # _ \@
+			CALL NEWLINE(13)
 			TWAIT 150, 1
 			CLEARLINE 14
 		NEXT
 	ELSE
 		PRINTFORML %" " * CENTERLINE("Thank you for playing!") + SUBSTRING("Thank you for playing!", 0, -1)%
-		FOR LINE, 0, 13
-			PRINTL
-		NEXT
+		CALL NEWLINE(13)
 		TWAIT 300, 1
 		CLEARLINE 14
 	ENDIF

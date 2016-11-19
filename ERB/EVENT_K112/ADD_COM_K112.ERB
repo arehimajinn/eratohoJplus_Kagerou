@@ -4,15 +4,15 @@
 
 ;----------------------------------------------------------------
 ;アナルセックス系捏造
-;TFLAG:17 1.＋キス
+;TFLAG:コマンド内容 1.＋キス
 ;----------------------------------------------------------------
 @ADD_ANALSEX
-SIF TEQUIP:45
+SIF TEQUIP:ボールギャグ
 	RETURN 0
 IF GROUPMATCH(SELECTCOM, 22, 26, 27, 28, 29)
 	PRINT キス
-	;TFLAG:17に捏造コマンドを入れる
-	TFLAG:17 = 1
+	;TFLAG:コマンド内容に捏造コマンドを入れる
+	TFLAG:コマンド内容 = 1
 	CALL KOJO_CUT
 ENDIF
 
@@ -23,7 +23,7 @@ ENDIF
 ;----------------------------------------------------------------
 ;アナルセックス系
 @ADD_ANALSEX_M
-SIF TFLAG:17 != 1
+SIF TFLAG:コマンド内容 != 1
 	RETURN 0
 SELECTCASE SELECTCOM
 	CASE 22, 26
@@ -36,8 +36,8 @@ SELECTCASE SELECTCOM
 					PRINT 舌を絡める
 			ENDIF
 			PRINTW キスをしながら再び腰を動かし始めた…
-			SIF TFLAG:31
-				TFLAG:31 = 2
+			SIF TFLAG:地の文用処女喪失フラグ
+				TFLAG:地の文用処女喪失フラグ = 2
 		;同様に前回の調教が後背位の場合
 		ELSEIF INSERT_CONTINUEABLE() && INRANGE(PREVCOM, 27, 29)
 			PRINTFORMW アヌスから抜き去ることなく%CALLNAME:TARGET%を仰向けに寝かせ、
@@ -47,12 +47,13 @@ SELECTCASE SELECTCOM
 			SIF TALENT:キス魔
 				PRINT 舌を絡め、
 			PRINTW 再び腰を動かし始めた…
-			SIF TFLAG:31
-				TFLAG:31 = 2
+			SIF TFLAG:地の文用処女喪失フラグ
+				TFLAG:地の文用処女喪失フラグ = 2
 		ELSE
 			SIF ABL:Ｍ感覚 >= 5
 				PRINT 深く
 			PRINT キスをしながら、
+			;TFLAG:263 = 着衣プレイ中に汚物を漏らさせた
 			SIF TFLAG:263
 				PRINTFORM 汚物まみれの%GET_UNDERWARE_NAME(TEQUIP:65)%をずらして、
 			SIF TALENT:キス魔
@@ -95,7 +96,7 @@ SELECTCASE SELECTCOM
 			SIF TFLAG:263
 				PRINT 汚物まみれの下着をずらして、
 			PRINTFORM %CALLNAME:TARGET%の
-			SIF PALAM:3 >= PALAMLV:4
+			SIF PALAM:潤滑 >= PALAMLV:4
 				PRINT 粘液にまみれた
 			PRINTW アヌスを貫いた…
 		ENDIF
@@ -198,7 +199,7 @@ SELECTCASE SELECTCOM
 			PRINT キスをし、
 			SIF TALENT:キス魔
 				PRINT 舌を絡めながら
-			SIF PALAM:3 >= PALAMLV:4
+			SIF PALAM:潤滑 >= PALAMLV:4
 				PRINT 粘液にまみれた
 			PRINTFORMW アヌスを待ち構えていたモノでゆっくり貫いた…
 		ENDIF
@@ -213,7 +214,7 @@ CALL KOJO_CUT_RETURN
 ;@KOJO_MESSAGE_COM内でCALLして使う。
 ;----------------------------------------------------------------
 @ADD_ANALSEX_S
-SIF TFLAG:17 != 1
+SIF TFLAG:コマンド内容 != 1
 	RETURN 0
 IF GROUPMATCH(SELECTCOM, 22, 26, 27, 28, 29)
 	SELECTCASE SELECTCOM

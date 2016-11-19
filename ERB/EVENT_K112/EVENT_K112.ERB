@@ -674,8 +674,8 @@ IF TFLAG:600 == 7
 					PRINTFORMW 　%CALLNAME:MASTER%は%CALLNAME:TARGET%を近くの木の影に連れ込んだ……
 					PRINTL
 					;午前、朝方のイメージで
-					IF !TIME
-						PRINTFORMW 「\@ DAY:2 == 1 ? 涼しい……けどこんなところで # 寒いの……暖めてくれる \@？」
+					IF IS_TIMEZONE("昼")
+						PRINTFORMW 「\@ IS_SEASON("夏") ? 涼しい……けどこんなところで # 寒いの……暖めてくれる \@？」
 						PRINTFORMW 「\@ CHARA_NOW(110) && NO:MASTER != 110 ? わかさぎ姫とか # 妖精達 \@に見られちゃったりしない……といいけど」
 						SIF TALENT:淫乱
 							PRINTW 「見られるのもいいけどね」
@@ -715,7 +715,7 @@ IF TFLAG:600 == 7
 				CASE 7
 					PRINTFORMW 　%CALLNAME:MASTER%は湯気の出ている%CALLNAME:TARGET%を布団に押し倒した……
 					PRINTL
-					PRINTFORMW 「泊まりに来\@ TIME ? たとはいえ # てる訳でもないのに \@、温泉まで来てする……？」
+					PRINTFORMW 「泊まりに来\@ IS_TIMEZONE("夜") ? たとはいえ # てる訳でもないのに \@、温泉まで来てする……？」
 					PRINTW 「別に入った後だし？　綺麗な状態だから良いけど……」
 					PRINTW 「着物が滅茶苦茶ね、後でちゃんと畳んでおかないと……」
 					PRINTFORMW 「……楽しませてね？　%CALLNAME:MASTER%……」
@@ -780,7 +780,7 @@ IF TFLAG:600 == 7
 					ENDIF
 				;海
 				CASE 14
-					IF DAY:2 == 3
+					IF IS_SEASON("冬")
 						PRINTFORMW 　%CALLNAME:MASTER%達は海の家の影に隠れた……
 						PRINTL
 						PRINTW 「人が沢山居るのに、こんなところでしようだなんて」
@@ -789,7 +789,7 @@ IF TFLAG:600 == 7
 					ELSE
 						PRINTFORMW 　%CALLNAME:MASTER%達は近くの岩陰に隠れた……
 						PRINTL
-						PRINTFORMW 「いや絶対バレるってば、だって狭いし、\@ DAY:2 == 3 ? 寒いし # 見えるし \@」
+						PRINTFORMW 「いや絶対バレるってば、だって狭いし、\@ IS_SEASON("冬") ? 寒いし # 見えるし \@」
 						PRINTFORMW 「待って\@ COSTUME_GROUP("水着") ? 水着 # 服 \@を脱がすのやめて……」
 						PRINTW 「まるでやめる気がない……だめねこれは」
 					ENDIF
@@ -861,7 +861,7 @@ IF TFLAG:600 == 7
 				;彼岸
 				CASE 24
 					;実際は何十年か周期で咲き乱れるはずだがそんなことは知ったことではない
-					PRINTFORMW 　%CALLNAME:MASTER%は\@ !DAY:2 ? 咲き乱れる花の上に # 近くの木の影で \@%CALLNAME:TARGET%を押し倒した……
+					PRINTFORMW 　%CALLNAME:MASTER%は\@ IS_SEASON("春") ? 咲き乱れる花の上に # 近くの木の影で \@%CALLNAME:TARGET%を押し倒した……
 					PRINTL
 					PRINTW 「周りにこんなに死者が居るのにするとかちょっと……」
 					PRINTW 「ってちょっと、服を脱がすのはやめ、んうっ」
@@ -1386,7 +1386,7 @@ IF TFLAG:600 == 31
 	CALL COMMON_PLANE_TEXT
 	PRINTW 「やるしかない……わね」
 	;満月は毎月15日に違いない！
-	IF DAY:1 == 15 && TIME == 1
+	IF DAY:1 == 15 && IS_TIMEZONE("夜")
 		PRINTFORMW 「こんな満月に運が悪いわね、貴\@ CSVTALENT(NO:(FLAG:25), 122) ? 方 # 女 \@」
 		;原作的なあれ、ちょっと強引かも
 		PRINTW 「あんまり調子に乗ってると、痛い目にあうわよ？」
@@ -2581,7 +2581,7 @@ IF TFLAG:13 == 82
 		;流れ星
 		ELSEIF TIME:11
 			PRINTW 「いい感じに流れ星も出てるし、一杯飲みましょう？」
-			PRINTFORMW 「あんまり夜更かしすると\@ DAY:2 == 3 ? 風邪になる # よくない \@から少しだけ、ね？」
+			PRINTFORMW 「あんまり夜更かしすると\@ IS_SEASON("冬") ? 風邪になる # よくない \@から少しだけ、ね？」
 		;虹
 		ELSEIF TIME:8
 			PRINTW 「夜に虹……ね、珍しい」
@@ -2590,57 +2590,47 @@ IF TFLAG:13 == 82
 		;それ以外、季節+天気分け
 		ELSE
 			;SELECTCASE入れ子っていうのはあんまり好きじゃないけどこっちのほうが分かりやすいのでこれで
-			SELECTCASE DAY:2
-				;春
-				CASE 0
-					SELECTCASE TIME:5
-						;晴れ
-						CASE 0
+			SELECTCASE KOJO_SEASON_NAME(DAY:2)
+				CASE "春"
+					SELECTCASE KOJO_WEATHER_NAME(TIME:5)
+						CASE "晴れ"
 							PRINTW 「夜桜をつまみにお酒、なんてね」
 							PRINTW 「あっ、お猪口に桜が入ってるわよ」
 							PRINTW 「……なんだかいいわねーこういうのも」
-						;快晴
-						CASE 1
+						CASE "快晴"
 							PRINTW 「綺麗な星空に舞う桜、いいわねー」
 							PRINTW 「……でも少し風が強いかな」
 							PRINTW 「ねえ、もっと近くに寄っていい？」
 							PRINTW 「駄目と言われても寄るけど……ふふふ」
 							PRINTL
 							PRINTFORMW 　そう言って%CALLNAME:TARGET%は身体を%CALLNAME:MASTER%に預けてきた……
-						;曇り
-						CASE 2
+						CASE "曇り"
 							PRINTW 「少し風が強いわね、中に入りましょうか」
 							PRINTL
 							PRINTW 「ふう、暖かい……ね、もっと寄ってもいい？」
 							PRINTFORMW 「ふふふ、風の音を聞きながら%CALLNAME:MASTER%とお酒を飲む」
 							PRINTW 「良いわよね……」
-						;雨
-						CASE 3
+						CASE "雨"
 							PRINTW 「生憎と雨ね、中に入って飲みましょう」
 							PRINTL
 							PRINTW 「うーん、雨の音で余計に静かになったように感じるわ」
 							PRINTFORMW 「……はぁ、美味しいわね……」
-						;狐の嫁入り、見たこと無いけどあるの？　夜に天気雨
-						CASE 7
+						CASE "狐の嫁入り"
 							PRINTW 「月に雨、想い人とお酒、うーんいいわね」
 							PRINTFORMW 「\@ DAY:1 == 15 ? 残念ながら満月だけどね # 綺麗な月に美味しいお酒 \@……はぁっ」
 					ENDSELECT
-				;夏
-				CASE 1
-					SELECTCASE TIME:5
-						;快晴
-						CASE 1
+				CASE "夏"
+					SELECTCASE KOJO_WEATHER_NAME(TIME:5)
+						CASE "快晴"
 							PRINTW 「暑いからね、冷たいお酒を飲もうと思って」
 							;晩酌出来るまでには結構長いっしょ
 							PRINTFORMW 「異変\@ FLAG:28 ? も解決した # 発生から長い \@けれどいつも通りで安心したわ」
 							PRINTW 「……蝉の声が静かね…………」
-						;曇り
-						CASE 2
+						CASE "曇り"
 							PRINTW 「曇ってる……と何故か涼しいわよね」
 							PRINTW 「ん……風が心地いいわー」
 							PRINTW 「お酒も美味しいし、いい感じね」
-						;雨
-						CASE 3
+						CASE "雨"
 							PRINTW 「雨で涼しい……お猪口に雨が入って波紋が出来てる」
 							PRINTW 「汚い……けどまあいいか」
 							IF TALENT:キス魔 && CFLAG:331
@@ -2650,85 +2640,71 @@ IF TFLAG:13 == 82
 								PRINTW 口の中から心地良い香りと、お酒特有の癖のあるにおいが広がってくる……
 								PRINTL
 								PRINTW 「ふふふ、どう？　美味しかった？」
-								EXP:96++
+								EXP:キス経験++
 							ELSE
 								PRINTW 「……うーん、風鈴の音が静かね……」
 							ENDIF
-						;大雨
-						CASE 4
+						CASE "大雨"
 							PRINTW 「雨でうるさいわね……まあいいわ」
 							PRINTW 「中で飲みましょう？　外だと面倒だわ」
 							PRINTW 「何が……って、毛が濡れると嫌だし」
 							PRINTW 「それとも私の濡れ姿が見たいの？」
 							PRINTW 「それはそれでまあ……でも今はお酒飲んでるしね」
 					ENDSELECT
-				;秋、果実のイメージがありまくりだった
-				CASE 2
-					SELECTCASE TIME:5
-						;晴れ
-						CASE 0
+				CASE "秋" ;果実のイメージがありまくりだった。
+					SELECTCASE KOJO_WEATHER_NAME(TIME:5)
+						CASE "晴れ"
 							PRINTW 「秋だし果実酒なんてどうかと思ってね」
 							;2006年5月から変更、その他の発泡性酒類に
 							PRINTW 「……？　りんご酒は果実酒じゃなくなった？」
 							PRINTW 「そうなの……まあどうでもいいわ、飲みましょう」
-						;快晴
-						CASE 1
+						CASE "快晴"
 							PRINTW 「この季節だし、ぶどう酒なんて手に入ったから一緒に飲もうと思って」
 							PRINTW 「いい感じの色ね……マーキングとか出来そう」
 							PRINTW 「……いや、そんなに下がらなくてもしないわよ？」
 							SIF TALENT:淫乱
 								PRINTW 「多分、きっと……おそらく…………？」
-						;曇り
-						CASE 2
+						CASE "曇り"
 							PRINTW 「漬けてあった梅酒を出してきたわ」
 							PRINTW 「とはいえ二年半ぐらいしか漬けてないけれどね」
 							PRINTW 「砂糖も高いし、このぐらいで……」
 							PRINTFORMW 「うん、美味しいわ、%CALLNAME:MASTER%もどうぞ？」
-						;雨
-						CASE 3
+						CASE "雨"
 							PRINTW 「雨……ねえ、ならブルーベリー酒でも飲みましょうか」
 							PRINTW 「まあ適当に雰囲気に合わせて選んだだけなんだけどね」
 							PRINTW 「どう？　美味しい？　……それはよかったわね」
 							PRINTW 「確かに美味しいわね、いつもよりも」
 							PRINTFORMW 「%CALLNAME:MASTER%と一緒に飲んでるからかしらね……」
-						;大雨
-						CASE 4
+						CASE "大雨"
 							PRINTW 「今日はいちご酒かしら、特に意味はないけれど」
 							PRINTW 「……大雨ね、凄い音がする」
 							PRINTW 「ま、この天気だとあれだし、ゆっくり飲みましょう」
 					ENDSELECT
-				;冬
-				CASE 3
-					SELECTCASE TIME:5
-						;晴れ
-						CASE 0
+				CASE "冬"
+					SELECTCASE KOJO_WEATHER_NAME(TIME:5)
+						CASE "晴れ"
 							PRINTW 「寒空に熱燗だー温かい……」
 							PRINTW 「でもまだ寒いわね、ちょっと寄るわよ」
 							PRINTW 「……うん、暖かい……」
-						;快晴
-						CASE 1
+						CASE "快晴"
 							PRINTW 「晴れ渡る寒空、寒いわね……」
 							PRINTW 「寒いとアルコールは回らなくなる……どうだったかしら」
 							PRINTW 「まあ、どっちでもいいわよね」
-						;曇り
-						CASE 2
+						CASE "曇り"
 							PRINTW 「月が隠れたり、出たり。雲の動きが速くて風は強い」
 							PRINTW 「まさに冬ねー眠くなってくるわ」
 							PRINTW 「ただ酔いが回っただけかもしれないけれど」
-						;雪
-						CASE 5
+						CASE "雪"
 							PRINTW 「うう……寒い、けれど……雪冷えの日本酒！」
 							PRINTW 「冷よし、燗よし、燗冷めよしってね、たとえ冬だろうが関係ないわ！」
 							PRINTW 「……ごめんやっぱり寒いわ……でも飲む……」
-						;大雪
-						CASE 6
+						CASE "大雪"
 							PRINTW 「大雪の中で熱燗とか燗映えするわねー」
 							PRINTW 「ついつい飲み過ぎちゃいそう」
 							PRINTW 「そうなったら止めてよね？」
 							SIF TALENT:淫乱
 								PRINTW 「それとも……酔わせて押し倒す？」
-						;細氷
-						CASE 8
+						CASE "細氷"
 							PRINTW 「温かい熱燗に綺麗な細氷、湯気がたって夜の星空に上がる」
 							PRINTW 「綺麗ねー、こういう時に飲むのは最高だわ」
 							PRINTW 「……冬だからあんまり飲んで酔うのもあれだけど」
@@ -3234,7 +3210,7 @@ ENDIF
 ;----------------------------------------------------------------
 IF TFLAG:13 == 99
 	PRINTL
-	IF MARK:反発刻印
+	IF MARK:反発感情
 		PRINTL 「……」
 		PRINTFORMW %CALLNAME:TARGET%は鋭い目つきでこちらを睨んでいる…
 	ENDIF
@@ -3531,7 +3507,7 @@ IF TFLAG:13 == 23
 			IF TALENT:恋人 || TALENT:恋慕
 				;夜
 				;長すぎふいたので一回こっきりに
-				IF TIME && FIRSTTIMES("育児室_夜")
+				IF IS_TIMEZONE("夜") && FIRSTTIMES("育児室_夜")
 					PRINTW 「あっ……来てくれたのね」
 					PRINTW 「ふふっ、今眠ったところなの」
 					PRINTW 「かわいいでしょう、この子」
@@ -4587,11 +4563,11 @@ IF TIME:1 && TALENT:恋慕
 					PRINTW 「今日から梅雨入り、嫌な季節が始まるわねぇ……」
 					PRINTW 「毛が濡れたり、湿っぽくて洗濯物が乾かなかったり」
 					PRINTW 「この時期は面倒で面倒で……」
-					IF GROUPMATCH(TIME:5, 0, 1)
+					IF WEATHER_GROUP("晴れ")
 						;快晴＝雲量が大体2だか3以下
-						PRINTFORMW 「まあ今日は\@ TIME:5 ? 雲ひとつない青空 # 綺麗な空 \@だけれど」
-					ELSEIF GROUPMATCH(TIME:5, 3, 4)
-						PRINTFORMW 「今日みたいに\@ TIME:5 == 3 ? 雨が降ると洗濯物が濡れたりして # 大雨が降ると外にも出られないし \@、面倒よね」
+						PRINTFORMW 「まあ今日は\@ IS_WEATHER("快晴") ? 雲ひとつない青空 # 綺麗な空 \@だけれど」
+					ELSEIF WEATHER_GROUP("雨")
+						PRINTFORMW 「今日みたいに\@ IS_WEATHER("雨") ? 雨が降ると洗濯物が濡れたりして # 大雨が降ると外にも出られないし \@、面倒よね」
 					ENDIF
 					PRINTW 「といっても仕方ないし、諦めるしかないんだけれどね」
 					SIF ITEM:516
@@ -4661,7 +4637,7 @@ IF TIME:1 && TALENT:恋慕
 					SIF FLAG_SPLIT_K112(CFLAG:334, "ラジオ体操") <= 6
 						CFLAG:334++
 					IF CFLAG:334 <= 7
-						SIF GROUPMATCH(TIME:5, 3, 4) && FLAG_SPLIT_K112(CFLAG:334, "ラジオ体操") >= 2
+						SIF WEATHER_GROUP("雨") && FLAG_SPLIT_K112(CFLAG:334, "ラジオ体操") >= 2
 							PRINTW 「雨だけど……まあ仕方ないわね」
 						SELECTCASE FLAG_SPLIT_K112(CFLAG:334, "ラジオ体操")
 							CASE 1
@@ -4923,7 +4899,7 @@ IF TIME:1 && TALENT:恋慕
 				;冬至
 				CASE 43
 					PRINTW 「一年で一番昼が短いから……夜は冷えるわ、面倒ね」
-					PRINTFORMW 「\@ TIME ? さっさと # 日が落ちない内に \@食べて、暖まりましょう」
+					PRINTFORMW 「\@ IS_TIMEZONE("夜") ? さっさと # 日が落ちない内に \@食べて、暖まりましょう」
 					PRINTW 「今日は……「ん」の付くものを食べるのね」
 					PRINTFORMW 「%RAND_SPLIT("かぼちゃでも/うどんにレンコンを入れて")%食べましょうか」
 				;バレンタインデー
@@ -5034,7 +5010,7 @@ IF TIME:1 && TALENT:恋慕
 					PRINT 「……私からのプレゼントは
 					IF TALENT:親愛
 						;ホワイトクリスマス
-						IF GROUPMATCH(TIME:5, 5, 6)
+						IF WEATHER_GROUP("雪")
 							;リボンがある
 							IF GETBIT(FLAG:70, 16) && FIRSTTIMES("親愛_ホワイトクリスマス_1")
 								PRINTW ……結構恥ずかしいわね」
@@ -5059,8 +5035,8 @@ IF TIME:1 && TALENT:恋慕
 										CASE 0
 											PRINTFORMW 思わず、影狼を押し倒してしまった……
 											PRINTW 「やっぱり似合わないかしら……あっ、ちょっと……」
-											PRINTFORMW 「もう、\@ TIME ? そんなにがっつかなくても # 昼間からなんて \@……ね？」
-											PRINTFORMW 「\@ TIME ? ………… # もう…… \@優しくしてね……？」
+											PRINTFORMW 「もう、\@ IS_TIMEZONE("夜") ? そんなにがっつかなくても # 昼間からなんて \@……ね？」
+											PRINTFORMW 「\@ IS_TIMEZONE("夜") ? ………… # もう…… \@優しくしてね……？」
 											;実験的なもの。ここに挟めばウフフから開始する。つまり……。ついでにリボン着けておく
 											TFLAG:44 = 1
 											TEQUIP:65 = 17
@@ -5141,10 +5117,10 @@ IF TALENT:恋慕 && FLAG:7 == 2
 	ELSEIF TIME:8 && TIME:5 != 7
 		IF PERCENT(25) && GETCHARA(1) != -1
 			PRINTW 「七色ね……紅白はこれの二割八分六厘未満だったかしら」
-		ELSEIF PERCENT(25) && GETCHARA(14) != -1
-			PRINTW 「七色って人形遣いを思い出すわよね」
-			SIF TRAIN_MEMBER(14)
-				PRINTW 「そうは思わない？　ご本人さん」
+;		ELSEIF PERCENT(25) && GETCHARA(14) != -1
+;			PRINTW 「七色って人形遣いを思い出すわよね」
+;			SIF TRAIN_MEMBER(14)
+;				PRINTW 「そうは思わない？　ご本人さん」
 		ELSE
 			PRINTDATAW
 				DATA 「綺麗な虹ね、歩けそうだわ」
@@ -5222,41 +5198,36 @@ IF TALENT:恋慕 && FLAG:7 == 2
 		ENDIF
 	;それ以外。天気関係。基本三個、適当に思いついたのを追加していく
 	ELSE
-		SELECTCASE TIME:5
-			;晴れ
-			CASE 0
-				IF EXP:94 && PERCENT(25)
+		SELECTCASE KOJO_WEATHER_NAME(TIME:5)
+			CASE "晴れ"
+				IF EXP:デート経験 && PERCENT(25)
 					PRINTW 「そうね、良いデート日和だわ。する？」
 				ELSE
 					PRINTDATAW
 						DATA 「んーいい天気ねー」
-						DATAFORM 「\@ DAY:2 == 1 ? こんな天気じゃ少し暑いわね # ぽかぽかして気持ちいいわー \@」
+						DATAFORM 「\@ IS_SEASON("夏") ? こんな天気じゃ少し暑いわね # ぽかぽかして気持ちいいわー \@」
 						DATAFORM 「綺麗な空ねー、絶好の\@ FLAG:28 >0 ? ひなたぼっこ # 異変解決 \@日和だわ」
 					ENDDATA
 				ENDIF
-			;快晴
-			CASE 1
+			CASE "快晴"
 				PRINTDATAW
 					DATA 「雲一つ無い空ね、綺麗だわ」
-					DATAFORM 「\@ DAY:2 == 1 ? 暑すぎるわ…… # うーん、気持ちのいい天気 \@」
+					DATAFORM 「\@ IS_SEASON("夏") ? 暑すぎるわ…… # うーん、気持ちのいい天気 \@」
 					DATA 「洗濯が捗りそうな天気だわー」
 				ENDDATA
-			;曇り
-			CASE 2
+			CASE "曇り"
 				PRINTDATAW
 					DATA 「いやーな天気ね、雨が降りそうで……」
 					DATA 「雨が降りそう……面倒ね」
 					DATA 「湿気が……毛を剃りたいわね」
 				ENDDATA
-			;雨
-			CASE 3
+			CASE "雨"
 				PRINTDATAW
 					DATA 「この天気だと食材を買い足しに行くのも無理ね……」
 					DATA 「雨は毛が濡れるから嫌だわ……」
-					DATAFORM 「\@ DAY:2 == 1 ? この時期に降ると涼しいわね # うう……ちょっと寒くなってきたわ \@」
+					DATAFORM 「\@ IS_SEASON("夏") ? この時期に降ると涼しいわね # うう……ちょっと寒くなってきたわ \@」
 				ENDDATA
-			;大雨
-			CASE 4
+			CASE "大雨"
 				IF TALENT:淫乱 && PERCENT(25) && FIRSTTIMES("天気_大雨_淫乱")
 					PRINTW 「こんな天気だとすることも無いわね」
 					PRINTW 「つまりは、そういうことなんだけど……」
@@ -5266,11 +5237,10 @@ IF TALENT:恋慕 && FLAG:7 == 2
 					PRINTDATAW
 						DATA 「うわぁ……土砂降りの雨だわ、外には出れないわね」
 						DATA 「酷い雨ね、何にも出来ないわ」
-						DATAFORM 「\@ DAY:2 == 1 ? この時期にこんな雨は珍しいわね # 寒いわ……誰か温めてくれないかなー？ \@」
+						DATAFORM 「\@ IS_SEASON("夏") ? この時期にこんな雨は珍しいわね # 寒いわ……誰か温めてくれないかなー？ \@」
 					ENDDATA
 				ENDIF
-			;雪
-			CASE 5
+			CASE "雪"
 				IF TALENT:淫乱 && PERCENT(25)
 					PRINTW 「雪ね……こういう時のえっちいことって盛り上がりそうよね」
 				ELSE
@@ -5280,20 +5250,18 @@ IF TALENT:恋慕 && FLAG:7 == 2
 						DATA 「歩きにくくならないと良いけど……」
 					ENDDATA
 				ENDIF
-			;吹雪
-			CASE 6
+			CASE "吹雪"
 				PRINTDATAW
 					DATA 「酷い雪、雪かきが大変だわ」
 					DATA 「昔を思い出すぐらいの雪ねー」
 					DATA 「寒い……私は半分人間だから普通の狼より寒さに強くないのよ」
 				ENDDATA
-			;狐の嫁入り
-			CASE 7
+			CASE "狐の嫁入り"
 				IF CHARA_NOW(21) && TALENT:(GETCHARA(21)):親愛 && FIRSTTIMES("天気_狐の嫁入り_藍")
 					PRINTW 「ふーん、あの狐との記念日か何かなの？」
 					PRINTW 「別に、別にどうでもいいけれど」
 					PRINTW 「私より狐の所に行ってあげたほうがいいんじゃないの？」
-				ELSEIF TALENT:親愛 && !RAND:4
+				ELSEIF TALENT:親愛 && PERCENT(25)
 					PRINTW 「狐だけじゃ不公平よね、狼だってあるべきだわ」
 				ELSE
 					PRINTDATAW
@@ -5302,10 +5270,9 @@ IF TALENT:恋慕 && FLAG:7 == 2
 						DATA 「何故か分からないけれど清々する気持ちになるわよね」
 					ENDDATA
 				ENDIF
-			;細氷
-			CASE 8
+			CASE "細氷"
 				;1%の確率で珍しい現象、午後限定
-				IF PERCENT(1) && TIME
+				IF PERCENT(1) && IS_TIMEZONE("夜")
 					PRINTDATAW
 						DATA 「嘘……太陽柱が出来てる」
 						DATA 「暈（かさ）とか珍しいわね、綺麗に出来てるわ」
@@ -5333,10 +5300,10 @@ ELSEIF TALENT:恋人 && TALENT:恋慕 == 0 && FLAG:7 == 2
 	RETURN 1
 
 ;進展無し（デート経験0）
-ELSEIF EXP:94 == 0 && FLAG:7 == 2
+ELSEIF EXP:デート経験 == 0 && FLAG:7 == 2
 	DRAWLINE
 	PRINTDATAW
-		DATAFORM 「\@ TIME ? こんにちは # こんばんは \@、%CALLNAME:MASTER%」
+		DATAFORM 「\@ IS_TIMEZONE("夜") ? こんにちは # こんばんは \@、%CALLNAME:MASTER%」
 		DATA 「さて、何をするの？」
 		DATA 「速く解決しないとね……」
 	ENDDATA
@@ -5396,7 +5363,7 @@ IF TFLAG:44 && FIRSTTIMES("初ウフフ")
 ELSEIF MARK:3
 	DRAWLINE
 	;午後(終了時は夜)
-	IF TIME
+	IF IS_TIMEZONE("夜")
 		PRINTDATAW
 			DATA 「もう夜ね、さっさと帰って」
 			DATA 「送ってあげましょうか？　送り狼になるかもしれないけどね」
@@ -5536,7 +5503,7 @@ ELSEIF TALENT:恋慕
 					SELECTCASE LOCAL
 						CASE 0
 							PRINTW 「さて、もういい時間だし、迷う前に帰りましょう」
-							PRINTFORMW 『あ、送りましょうか？　\@ TIME ? もう辺りも暗いです # 霧も深くなってきました \@し』
+							PRINTFORMW 『あ、送りましょうか？　\@ IS_TIMEZONE("夜") ? もう辺りも暗いです # 霧も深くなってきました \@し』
 							PRINTW 「いや、平気よ、ありがとうね」
 							PRINTW 『いえいえ、お達者で』
 						CASE 1
@@ -5544,7 +5511,7 @@ ELSEIF TALENT:恋慕
 							PRINTW 『じゃあ送りますね、迷うといけませんから』
 							PRINTW 「そう？　ありがとう」
 						CASE 2
-							PRINTW 「帰りましょう。\@ TIME ? 暗く # 霧が濃く \@なってきたわ、迷いそう」
+							PRINTW 「帰りましょう。\@ IS_TIMEZONE("夜") ? 暗く # 霧が濃く \@なってきたわ、迷いそう」
 							PRINTW 『道に迷うは妖精の仕業、ですよ？　ふふっ』
 							PRINTFORMW 「じゃあ、貴女を退治すればいいの？　それとも\@ (GETCHARA(5) > 0 && PERCENT(50)) ? チルノ # 野良妖精 \@？」
 							PRINTW 『冗談ですから、やめてくださいよもう』
@@ -5561,13 +5528,13 @@ ELSEIF TALENT:恋慕
 							PRINTW 「どうせ帰る時に悪戯するんでしょう」
 							PRINTW 『うん！』
 						CASE 1
-							PRINTFORMW 「帰りましょう、\@ DAY:2 == 1 ? 夏なのに # なんだか \@寒くなってきたわ」
+							PRINTFORMW 「帰りましょう、\@ IS_SEASON("夏")? 夏なのに # なんだか \@寒くなってきたわ」
 							PRINTW 『それってもしかしてあたいのせい？』
 							PRINTW 「……まあそうでしょうね」
 							PRINTW 『やっぱりあたいは最強ね！』
 							PRINTW 「うんまあ、それでいいわ」
 						CASE 2
-							PRINTFORMW 「\@ DAY:2 == 3 ? 寒く # 霧が濃く \@なってきたし、帰りましょう」
+							PRINTFORMW 「\@ IS_SEASON("冬") ? 寒く # 霧が濃く \@なってきたし、帰りましょう」
 							PRINTW 『別に寒くないよ？　それに霧もそこまで濃くない』
 							PRINTW 「チルノにとっては濃くないかもしれないけれど、私達にとっては濃いのよ」
 							PRINTW 『そういうものなの？』
@@ -5578,8 +5545,8 @@ ELSEIF TALENT:恋慕
 				;三月精も追加したいけど多すぎやる気ない
 				ELSE
 					PRINTDATA
-						DATAFORM 「\@ TIME ? 暗く # 霧が濃く \@なってきたし帰りましょうか」
-						DATAFORM 「\@ DAY:2 == 3 ? とことん # ちょっと \@寒いから帰りましょう？」
+						DATAFORM 「\@ IS_TIMEZONE("夜") ? 暗く # 霧が濃く \@なってきたし帰りましょうか」
+						DATAFORM 「\@ IS_SEASON("冬") ? とことん # ちょっと \@寒いから帰りましょう？」
 						;花映塚で咲いてなかった……はず
 						DATA 「さあて、帰りましょうか。花も咲いてない程だしね」
 					ENDDATA
@@ -5643,8 +5610,8 @@ ELSEIF TALENT:恋慕
 			CASE "白玉楼"
 				PRINTDATAW
 					DATA 「昼でも夜でも綺麗よね、ここの桜」
-					DATAFORM 「\@ TIME ? 夜 # 昼でも \@桜が綺麗だったわー」
-					DATAFORM 「桜が綺麗だったわ……\@ TIME ? 夜だしね # 昼だからこそかしら \@」
+					DATAFORM 「\@ IS_TIMEZONE("夜") ? 夜 # 昼でも \@桜が綺麗だったわー」
+					DATAFORM 「桜が綺麗だったわ……\@ IS_TIMEZONE("夜") ? 夜だしね # 昼だからこそかしら \@」
 				ENDDATA
 			;遊園地、水族館、動物園、博物館。水族館にぶち込む、とは
 			CASE "遊園地", "水族館", "動物園", "博物館"
@@ -5659,7 +5626,7 @@ ELSEIF TALENT:恋慕
 				ENDIF
 			;海
 			CASE "海"
-				IF DAY:2 == 3 && PERCENT(25)
+				IF IS_SEASON("冬") && PERCENT(25)
 					PRINTW 「そうね、寒いし早く帰りましょう」
 				ELSE
 					PRINTDATAW
@@ -5800,7 +5767,7 @@ ELSEIF TALENT:恋慕
 	;体力が残った状態で終了
 	ELSEIF BASE:0 >= 500
 		;午後(終了時は夜)
-		IF TIME
+		IF IS_TIMEZONE("夜")
 			;ウフフ中に終了
 			IF TFLAG:44
 				SELECTCASE TALENT:淫乱 ? RAND:6 # RAND:3
@@ -5884,7 +5851,7 @@ ELSEIF TALENT:恋慕
 	;体力が残っていない状態で終了
 	ELSE
 		;午後(終了時は夜)
-		IF TIME
+		IF IS_TIMEZONE("夜")
 			;ウフフ中に終了
 			;ん？　ピロートークかな？　眠さ重視
 			IF TFLAG:44
@@ -5967,7 +5934,7 @@ ELSEIF PREVCOM == 323
 ELSEIF TALENT:恋人 && TALENT:恋慕 == 0
 	DRAWLINE
 	;午後(終了時は夜)
-	IF TIME
+	IF IS_TIMEZONE("夜")
 		PRINTW 「……あら？　もう夜ね……」
 		PRINTW 「続きはまた次の機会にしましょう」
 	;午前(終了時はお昼)
@@ -6263,7 +6230,7 @@ IF SELECTCOM == 301
 	;無言で伝わるなんて思ってはないけれど、ある程度親しいなら異変に気づくこともある（もちろん、気づかないこともある）し、まあそれに近いかな。
 	;会話なんて必要ないってわけじゃないけれど、こういう会話も楽しいんじゃないかな。
 	;いくらなんでも没。何もしないとかでやれ。
-;	IF CFLAG:402 == 3 && !TIME && TFLAG:18 == -1 && TALENT:親愛 && ASSI == -1 && FIRSTTIMES("会話_無言")
+;	IF CFLAG:402 == 3 && IS_TIMEZONE("昼") && TFLAG:18 == -1 && TALENT:親愛 && ASSI == -1 && FIRSTTIMES("会話_無言")
 ;		PRINTW 「……」
 ;		PRINTL 　ただ無言で、何もせずに見つめ合っている。
 ;		PRINTW しかし、それは嫌なものではなく、両者の間には楽しげな雰囲気が漂っていた……
@@ -6277,7 +6244,7 @@ IF SELECTCOM == 301
 					PRINTW 「人里に入っても平気かしら」
 					PRINTW 「……まあ、何もしなければ大丈夫でしょう」
 				;甘味処イベント(20%)：甘味処で休んでいくイベント。午前のみ
-				ELSEIF PERCENT(20) && !TIME && !GETBIT(CFLAG:900, 1)
+				ELSEIF PERCENT(20) && IS_TIMEZONE("昼") && !GETBIT(CFLAG:900, 1)
 					;足の速さの件。とても好き
 					PRINTFORML 　\@ TALENT:恋慕 ? 前を # 横で \@歩いていた%CALLNAME:TARGET%が甘味処の前で足を止めた。
 					PRINTW 「少し、休んでいきましょうか」
@@ -6293,7 +6260,7 @@ IF SELECTCOM == 301
 					SIF ABL:90 >= 3
 						SETBIT CFLAG:900, 2
 				;春の後半(21日以降)かつ一年で一回もこの分岐を通っていない場合に25%の確率で発生
-				ELSEIF PERCENT(25) && !GETBIT(CFLAG:800, 1) && DAY:2 == 0 && DAY:1 >= 21
+				ELSEIF PERCENT(25) && !GETBIT(CFLAG:800, 1) && IS_SEASON("春") && DAY:1 >= 21
 					PRINTW 「もう夏ね……そろそろ服を変えなくちゃ」
 					SETBIT CFLAG:800, 1
 				ELSE
@@ -15787,7 +15754,7 @@ IF GETCHARA(112) != -1
 		||
 		(GETBIT(CFLAG:(GETCHARA(112)):340, 42) && CFLAG:(GETCHARA(112)):400 < 70))
 		&&
-		DAY:1 == 1 && !TIME
+		DAY:1 == 1 && IS_TIMEZONE("昼")
 		
 	}
 		CFLAG:(GETCHARA(112)):400++
@@ -15796,14 +15763,14 @@ ENDIF
 
 ;一年でリセットされるフラグの処理
 ;この口上では700台とリセットされるフラグとしている。簡単に流用できるのでぜひ。
-IF DAY:1 == 1 && DAY:2 == 0 && !TIME
+IF DAY:1 == 1 && IS_SEASON("春") && IS_TIMEZONE("昼")
 	FOR LOCAL, 800, 900
 		CFLAG:LOCAL = 0
 	NEXT
 ENDIF
 
 ;上の一月版
-IF DAY:1 == 1 && !TIME
+IF DAY:1 == 1 && IS_TIMEZONE("昼")
 	FOR LOCAL, 900, 1000
 		CFLAG:LOCAL = 0
 	NEXT
@@ -15885,7 +15852,7 @@ ENDIF
 	LIST '= "DUMMY/紅白饅頭/竹箒/骨付き肉/かき氷/絵皿/黒い羽/曜日の石/"
 	+ "懐中時計/赤い糸/フラン人形"
 }
-SPLIT LIST, "/". LIST
+SPLIT LIST, "/", LIST
 PRESENT '= ""
 FOR LOCAL, 0, 150
 	SIF LIST:LOCAL == "DUMMY"
@@ -15905,19 +15872,17 @@ RETURNF RAND_SPLIT(PRESENT)
 @RAND_TEA_K112
 #FUNCTIONS
 #DIMS TEA
-
 ;まず普通の奴を追加
 TEA '= "お茶/紅茶/昆布茶/ほうじ茶/ジャスミン茶"
-;春
-SIF !DAY:2
+;次いで季節ごと
+SELECTCASE KOJO_SEASON_NAME(DAY:2)
+	CASE "春"
 	TEA += "/ハーブティー"
-;夏
-SIF DAY:2 == 1
+	CASE "夏"
 	TEA += "/麦茶/アイスティー/烏龍茶/アイスコーヒー"
-;冬
-SIF DAY:2 == 3
+	CASE "冬"
 	TEA += "/ココア/珈琲"
-
+ENDSELECT
 RETURNF RAND_SPLIT(TEA)
 
 ;----------------------------------------------------------------

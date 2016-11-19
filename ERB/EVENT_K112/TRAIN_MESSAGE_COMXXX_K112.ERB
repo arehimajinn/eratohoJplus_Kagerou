@@ -7,19 +7,19 @@
 ;--------------------------------------------------
 @TRAIN_MESSAGE_COM300_K112
 ;対象に恋慕かつ主導権が対象側。RAND取れねーけど取る気がないしOK
-IF TALENT:恋慕 && TFLAG:45
+IF TALENT:恋慕 && TFLAG:主導権
 	PRINTFORMW %RAND_SPLIT("満面の笑みの/微笑みながら/素敵な笑顔の")%%CALLNAME:TARGET%に誘われ、弾幕ごっこをした
 ELSE
 	PRINTFORMW %CALLNAME:PLAYER%は%CALLNAME:TARGET%と弾幕ごっこをした
 ENDIF
-IF TFLAG:18 == 1
+IF TFLAG:成功判定 == 1
 	;主導権が主人側なら良い経験。対象側なら満足させる
 	PRINTFORML 思っていたよりも良い勝負が出来た。\@ !TFLAG:45 ? これは良い経験になるだろう # その結果に%CALLNAME:TARGET%も満足そうだ \@…
-ELSEIF TFLAG:18 == -1
+ELSEIF TFLAG:成功判定 == -1
 	PRINTFORML ……しかし、%CALLNAME:PLAYER%はあっさりとやられてしまった
 	;主導権が対象側
-	IF TFLAG:45
-		IF TALENT:恋慕 && ABL:15 < 2
+	IF TFLAG:主導権
+		IF TALENT:恋慕 && ABL:サドっ気 < 2
 			PRINTFORML %CALLNAME:TARGET%はそれを心配そうに見ている…
 		ELSE
 			PRINTFORML そのことに%CALLNAME:TARGET%は不満そうにしている…
@@ -33,7 +33,7 @@ ENDIF
 @TRAIN_MESSAGE_COM301_K112
 PRINTFORM %CALLNAME:PLAYER%は%CALLNAME:TARGET%と
 CFLAG:402 = RAND:6
-IF TALENT:153
+IF TALENT:恋人
 	SELECTCASE CFLAG:402
 		CASE 0
 			PRINTFORM 指先を絡ませ\@ TALENT:恋慕 ? 、密着し #  \@ながら
@@ -42,7 +42,7 @@ IF TALENT:153
 		CASE 2
 			PRINTFORM 少し照れ\@ TALENT:恋慕 ? て笑い #  \@ながら
 		CASE 3
-			IF !TIME
+			IF IS_TIMEZONE("昼")
 				PRINTFORM 昼の光の中で
 			ELSE
 				PRINTFORM 夜の静けさの中で
@@ -69,9 +69,9 @@ ELSE
 	ENDSELECT
 ENDIF
 PRINTFORMW 話をした
-IF TFLAG:18 == 1
+IF TFLAG:成功判定 == 1
 	PRINTFORML 楽しい時間が流れた…
-ELSEIF TFLAG:18 == -1
+ELSEIF TFLAG:成功判定 == -1
 	PRINTFORML 会話が途切れると気まずい空気が流れた…
 ENDIF
 
